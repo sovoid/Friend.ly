@@ -1,5 +1,5 @@
 {
-  "name": "friendly",
+  "name": "friend.ly",
   "version": "1.0.0",
   "scripts": {
     "start": "node ./bin/www",
@@ -62,12 +62,12 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "DivySrivastava",
-        "repo": "openfuel"
+        "owner": "AlQaholic007",
+        "repo": "Friend.ly"
       }
     ],
-    "appId": "com.divysrivastava.desktop.openfuel",
-    "copyright": "Divy Srivastava 2019",
+    "appId": "com.alqaholic007.desktop.friendly",
+    "copyright": "Soham Parekh 2019",
     "mac": {
       "target": [
         "dmg",
@@ -82,7 +82,7 @@
         "portable"
       ],
       "publish": "github",
-      "publisherName": "DivySrivastava"
+      "publisherName": "AlQaholic007"
     },
     "linux": {
       "target": [
@@ -91,13 +91,9 @@
         "deb"
       ],
       "publish": "github",
-      "maintainer": "Divy Srivastava <dj.srivastava23@gmail.com>"
+      "maintainer": "AlQaholic007 <mail@sohamp.dev>"
     }
   },
-  "author": "Dan-Divy <dj.srivastava23@gmail.com,dan@dancodes.online>",
-  "license": "MIT",
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/dan_divy"
-  }
+  "author": "Soham Parekh <vidhimody6@gmail.com, mail@sohamp.dev>",
+  "license": "MIT"
 }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <%- include('../head') -%>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="/animations/jquery-sakura.min.css" /> 
+  <body>
+  <%- include('../navbar')	-%>
+    <br>
+    <div class="container" id="mainPage">
+      <img src="<%= user.profile_picture %>" class="logo">
+      <a class="gram-card-user-name" href="">@<%= user.username %></a>
+      (<%= user.name %>) 
+     
+      <br><br><span class="bio"><%- user.bio %></span><br><br>
+     
+      <div class="float-right margin-right-10">
+        
+        
+        <a class="btn btn-action btn-sm btn-default" href="/me/settings">Settings</a>
+      </div>
+      <br><br><br>
+      
+     
+      <h1>Posts</h1>
+      <% if(user.posts) { for(var x=0;x<user.posts.length;x++) {
+        if(user.posts[x].static_url) { %>
+        <img src="<%= user.posts[x].static_url %>" class="feed-view-img">
+      <%} else { %>
+        <blockquote>
+            <a href="/post/<%= user.posts[x]._id %>"><%= user.posts[x].caption.length > 10 ? user.posts[x].caption.slice(0, 10) + "..." : user.posts[x].caption %></a> posted on <%= user.posts[x].createdAt.toString().split("T")[0] %>
+        </blockquote>
+      <% } }} %>
+    </div>
+    <div class="container">
+      <br><br>
+      Developer mode : <input type="checkbox" name="dev-mode" id="dev-mode"><br>
+                <span class="bio" id="dev-key" style="display: none;">Enter developer key to verify your account: <form onsubmit="window.location.href = '/developer/verify/' + this.getElementsByTagName('input')[0].value; return false"><input class="form-control"></form></span>
+              <br><br>
+              </div>
+   
+    <div id="notify_message" class="notify_message-success">
+    	<center>Settings</center>
+    </div>
+    <%- include('../tabs') %>
+    <%- include('../footer') -%>
+  </body>
+  <script type="text/javascript">
+    const _id = "<%= user._id %>";
+    $("#dev-mode").on("click",function(e) {
+      console.info(e.target.checked);
+      if(e.target.checked) {
+        $("#dev-key")[0].style.display = "inherit";
+      }
+      else {
+        $("#dev-key")[0].style.display = "none";
+      }
+    })
+  </script>
+  <script type="text/javascript" src="/javascripts/follow.js"></script>
+</html>

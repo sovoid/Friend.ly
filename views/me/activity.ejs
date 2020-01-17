@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<% function timeSince(o){var t=Math.floor((new Date-o)/1e3),r=Math.floor(t/31536e3);return r>1?r+" years":(r=Math.floor(t/2592e3))>1?r+" months":(r=Math.floor(t/86400))>1?r+" days":(r=Math.floor(t/3600))>1?r+" hours":(r=Math.floor(t/60))>1?r+" minutes":Math.floor(t)+" seconds"}%>
+<html>
+  <%- include('../head') -%>
+  <body>
+  <%- include('../navbar')	-%>
+  <br>
+ 
+  <div class="container-fluid" style="margin: 7%">
+    <div class="row">
+        <div class="col-md-12"><br>
+            <i class="fa fa-bell" style="color: #2a6171; font-size: 30px"></i>
+            <h2><%= activity.length == 0 ? "No new " : activity.length + " " %>Notifications</h2>  <br>
+            <% if(activity.length > 0) { %>
+                <form action="/api/v1/notifications/markAsRead" class="float-left" method="post">
+                    <button type="submit" class="btn btn-sm btn-success"> Mark all as read </button>
+                </form> 
+            <% } else { %>
+                    <a type="submit" class="btn btn-sm btn-success" href=""> Refresh </a>
+            <% } %>
+        </div>
+    </div>
+     <br>
+        <ul class="list-group">
+            <% for(var i=activity.length-1;i != -1;i--) { %>
+                <li class="list-group-item"><a href="<%= activity[i].link %>?delete_notif=<%= activity[i].id %>"><%= activity[i].msg %></a> - <b><%= timeSince(new Date(activity[i].time)) %> ago</b><br></li>
+            <% } %>    
+         </ul>
+  </div>
+  
+  <%- include('../tabs') -%>
+  <%- include('../footer') -%>  
+</html>

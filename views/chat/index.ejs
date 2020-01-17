@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <%- include('../head') -%>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="/animations/jquery-sakura.min.css" />
+  <body>
+  <%- include('../navbar')	-%>
+    <br>
+    <div class="container" id="mainPage">
+      <ul class="list-group">
+  <li class="list-group-item active"><strong>Talk to someone</strong></li>
+  <% for(var i=0;i<users.length;i++) { 
+    if(users[i].id != user.id) {%>
+      <li class="list-group-item">
+      <img class="logo" src="<%= users[i].profile_picture %>" alt="">
+      <a href="/chat/<%= users[i].id %>" style="color:black;"><%= users[i].username %></a>
+    </li>
+  <% }} %>
+</ul>
+    </div>
+    <%- include('../tabs') %>
+    <%- include('../footer') -%>
+  </body>
+
+</html>

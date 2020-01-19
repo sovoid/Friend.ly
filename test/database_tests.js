@@ -17,7 +17,7 @@ describe("Database Tests", function() {
   //Once a connection is established invoke done()
 
   before(function(done) {
-    mongoose.connect("mongodb://localhost/openfuel-test", {
+    mongoose.connect("mongodb://localhost/friendly-test", {
       useUnifiedTopology: true
     });
     const db = mongoose.connection;

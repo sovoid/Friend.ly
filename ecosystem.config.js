@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "openfuel",
+      name: "friendly",
       script: "./bin/www",
       instances: 2,
       mode: "cluster",
@@ -13,7 +13,7 @@ module.exports = {
   deploy: {
     production: {
       user: "node",
-      host: "openfuel.org",
+      host: "",
       ref: "origin/master",
       repo: "git@github.com:repo.git"
     }

@@ -8,20 +8,19 @@
   
   <body>
     <%- include('navbar') -%>
-    <div id="particles-js"></div>
     <div class="landing-main">
     <!-- Banner -->
 			<section id="banner">
 				<div class="inner">
 					<h2 class="major special">
 						<span class="landing-headline">
-							Connecting Opensource Developers<br>to Organizations adopting Opensource tech
+							Your vibe attracts your tribe
 						</span>
 					</h2>
 					<!--<p>to organizations adopting Opensource</p>-->
 					<ul class="actions special stacked">
-						<li><a href="account/github" class="button primary large">
-								<span class="icon solid brands fa-github"></span>
+						<li><a href="account/twitter" class="button primary large">
+								<span class="icon solid brands fa-twitter"></span>
 								Get started</a>
 						</li>
 						<li><a href="#one"><span class="icon solid major fa-angle-down"></span></a></li>
@@ -32,68 +31,7 @@
 			<!-- One -->
 			<section id="one" class="wrapper alt style2">
 			</section>
-
-			<!-- Two -->
-			<section id="two" class="wrapper alt">
-				<section class="spotlight">
-					<div class="image"><img src="images/1.png" alt="" /></div>
-					<div class="content">
-						<h3 class="major subheadline">
-							<span class="icon solid major fa-plug"></span>
-							Fueling Open-Source Adoption
-						</h3>
-						<p> 
-								Why dont more startups and companies use open-source? <br>
-								Lack of support, advisement and documentation.<br> 
-								This is why we're building a network of open-source developers
-								with prior experience on Open-Source technologies who can help companies adopt open-source technologies more easily. 
-						</p>
-					</div>
-				</section>
-				<section class="spotlight">
-					<div class="image"><img src="images/2.png" alt="" /></div>
-					<div class="content">
-						<h3 class="major subheadline">
-							<span class="icon solid major fa-ticket-alt"></span>
-							Open-Source Heroes
-						</h3>
-						<p>
-							We're creating a platform for recognizing Open-Source developers 
-							giving access to resources such as tickets, passes to Developer conferences and goodies; 
-							Along with an Award platform for recognizing Open-Source Heroes. 
-						</p>
-					</div>
-				</section>
-				<section class="spotlight">
-					<div class="image"><img src="images/3.png" alt="" /></div>
-					<div class="content">
-						<h3 class="major subheadline">
-							<span class="icon solid major fa-ticket-alt"></span>
-							Open-Source Founders
-						</h3>
-						<p>
-							What motivates Open-Source technology founders? When people use their softare more often and contribute to it.
-							Through our outreach we're aiming at getting more startups & companies to use Opensourec tech and get more young people to contribute to Open-Source. 	
-						</p>
-					</div>
-				</section>
-			</section>
 		</div>	
-
-		<!-- Three -->
-			<section id="three" class="wrapper style1 special">
-				<div class="inner narrow">
-					<h3 class="major special">Open-Source technology is the engine of hope & innovation</h3>
-					<p>
-						Behind Openfuel is a distributed team of developers, designers & thinkers
-						who are unreasonably hopeful about a brighter future. 
-						After all, in a world where it is considered reasonable to accept limitations, innovation comes out of has to be full of reasonable .
-					</p>
-					<ul class="actions special">
-						<li><a href="#" class="button primary large">Get started</a></li>
-					</ul>
-				</div>
-			</section>
 		<%- include('footer') -%>
     <div id="notify_message" class="notify_message-success"></div>
   </body>
@@ -101,66 +39,6 @@
   
   <script src="/animations/jquery-sakura.min.js"></script>
   <script src="javascripts/classie.js"></script>
-  <script type="text/javascript" src="/javascripts/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: {
-            enable: false
-          },
-          onclick: {
-            enable: false
-          },
-          resize: true
-        }
-      },
-      events: {
-        onresize: {
-          enable: true,
-          density_auto: true,
-          density_area: 400 // nb_particles = particles.nb * (canvas width *  canvas height / 1000) / density_area
-        },
-        onclick: {
-          enable: false
-        }
-      },
-      particles: {
-        number: { value: 25, density: { enable: true, value_area: 800 } },
-        color: { value: ["#f9f8eb", "#76b39d", "#155263", "#f0b917"] },
-        shape: {
-          type: "circle",
-          stroke: { width: 0, color: "#fff" },
-          polygon: { nb_sides: 5 }
-        },
-        opacity: {
-          value: 0.7,
-          random: false,
-          anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
-        },
-        line_linked: {
-          enable: false
-        },
-        size: {
-          value: 40,
-          random: true,
-          anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
-        },
-        move: {
-          enable: true,
-          speed: 6,
-          direction: "none",
-          random: true,
-          straight: false,
-          out_mode: "out",
-          bounce: true,
-          attract: { enable: false, rotateX: 600, rotateY: 1200 }
-        }
-      },
-      retina_detect: true
-    });
-  </script>
   <script src="javascripts/jquery.min.js"></script>
   <script src="javascripts/browser.min.js"></script>
   <script src="javascripts/breakpoints.min.js"></script>

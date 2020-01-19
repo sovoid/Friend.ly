@@ -5,16 +5,20 @@
   <body>
   <%- include('../navbar')	-%>
     <br>
-
-    <div class="container" style="margin-bottom: 15%">
-        <h1>Your settings</h1><br>
-        <img style="display: inline; border-radius: 50%; width: 20%" src="<%= user.profile_pic %>?cache=<%= Math.random() %>" id="pfp"><input id="fileUpload" onchange="upload(this.id)" style="margin-top: 5%;margin-bottom: 5%;width: 70%;display: inline;margin-left: 10%;" type="file" name="file" class="form-control">
-        <input type="text" onchange="change(this.value, 'Username')" class="form-control" style="margin-top: 5%" value="<%= user.username %>"  placeholder="Username">
-        <input type="text" onchange="change(this.value, 'First Name')" class="form-control" style="margin-top: 5%; width: 49.5%; display: inline" value="<%= user.firstname %>" placeholder="First name">
-        <input type="text" onchange="change(this.value, 'Last Name')" class="form-control" style="margin-top: 5%; width: 50%; display: inline" value="<%= user.lastname %>"  placeholder="Last name">
-        <input type="text" onchange="change(this.value, 'Bio')" class="form-control" style="margin-top: 5%" value="<%= user.bio %>" placeholder="Bio">
+    <div id="mainPage" style="height: 100%;">
+      <%- include('../sidebar2') -%>
+      <div class="column col-xs-12 col-sm-9 col-lg-10" style="margin:auto" id="main">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Your settings</h1><br>
+            <img style="display: inline; border-radius: 50%; width: 20%" src="<%= user.profile_picture %>" id="pfp"><input id="fileUpload" onchange="upload(this.id)" style="margin-top: 5%;margin-bottom: 5%;width: 70%;display: inline;margin-left: 10%;" type="file" name="file" class="form-control">
+            <input type="text" onchange="change(this.value, 'Username')" class="form-control" style="margin-top: 5%" value="<%= user.username %>"  placeholder="Username" disabled>
+            <input type="text" onchange="change(this.value, 'First Name')" class="form-control" style="margin-top: 5%; width: 49.5%; display: inline" value="<%= user.name %>" placeholder="=Name">
+            <input type="text" onchange="change(this.value, 'Bio')" class="form-control" style="margin-top: 5%" value="<%= user.bio %>" placeholder="Bio">
+          </div>
+        </div>
+      </div>
     </div>
-
 
     <%- include('../tabs') %>
     <%- include('../footer') -%>

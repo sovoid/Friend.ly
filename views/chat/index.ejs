@@ -6,17 +6,24 @@
   <body>
   <%- include('../navbar')	-%>
     <br>
-    <div class="container" id="mainPage">
-      <ul class="list-group">
-  <li class="list-group-item active"><strong>Talk to someone</strong></li>
-  <% for(var i=0;i<users.length;i++) { 
-    if(users[i].id != user.id) {%>
-      <li class="list-group-item">
-      <img class="logo" src="<%= users[i].profile_picture %>" alt="">
-      <a href="/chat/<%= users[i].id %>" style="color:black;"><%= users[i].username %></a>
-    </li>
-  <% }} %>
-</ul>
+    <div id="mainPage" style="height: 100%;">
+      <%- include('../sidebar2') -%>
+      <div class="column col-xs-12 col-sm-9 col-lg-10" style="margin:auto" id="main">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="list-group">
+              <li class="list-group-item active"><strong>Talk to someone</strong></li>
+              <% for(var i=0;i<users.length;i++) { 
+              if(users[i].id != user.id) {%>
+              <li class="list-group-item">
+                <img class="logo" src="<%= users[i].profile_picture %>" alt="">
+                <a href="/chat/<%= users[i].id %>" style="color:black;"><%= users[i].username %></a>
+              </li>
+              <% }} %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
     <%- include('../tabs') %>
     <%- include('../footer') -%>

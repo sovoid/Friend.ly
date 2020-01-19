@@ -28,7 +28,7 @@ app.conf = require("./config/app");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-require("./utils/handlers/github");
+require("./utils/handlers/twitter");
 
 const cooky = {
   secret: "work hard",
@@ -66,12 +66,12 @@ app.use(passport.initialize());
 var date = new Date();
 app.events = [
   {
-    title: "OpenFuel",
-    text: "Launching soon...",
+    title: "Friend.ly",
+    text: "Coming soon...",
     img: "/images/station.png",
     time: [date, date.setDate(date.getDate() + 1)],
     link: {
-      link_url: "https://openfuel.org",
+      link_url: "#",
       link_text: "Visit"
     }
   }

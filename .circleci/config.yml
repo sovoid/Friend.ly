@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/openfuel
+    working_directory: ~/friendly
     docker:
       - image: circleci/node:latest
       - image: mongo:latest

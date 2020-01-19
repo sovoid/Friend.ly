@@ -13,6 +13,7 @@ router.get("/", function(req, res, next) {
             req.app.events.slice(a);
           }
         });
+        console.log(users);
         res.render("index", {
           user: req_user,
           title: req.app.conf.name,

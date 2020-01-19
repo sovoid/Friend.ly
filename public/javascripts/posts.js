@@ -49,7 +49,7 @@
                 <div class="gram-card-header">
                   <img src="${
                     p.author.profile_picture
-                  }?cache=${Math.random()}" class="gram-card-user-image lozad">
+                  }" class="gram-card-user-image lozad">
                   <a class="gram-card-user-name" href="/u/@${
                     p.author.username
                   }">${p.author.username}</a>

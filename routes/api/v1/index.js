@@ -7,9 +7,9 @@ var User = require("../../../utils/models/user");
 var ta = require("time-ago");
 const Fuse = require("fuse.js");
 const q = require("queue")({ autostart: true });
+var _ = require("underscore");
 
 // Rate limiting
-
 router.use(function(req, res, next) {
   q.push(async function() {
     next();
@@ -91,7 +91,7 @@ router.get("/v1/posts", function(req, res) {
       if (err) res.status(500).send(err);
       let posts = [];
       if (req.query.sort == "feed") {
-        results = results.filter(u => user.openFollowers.find(f => f == u.id));
+        results = results.filter(u => user.friendlyFollowers.find(f => f == u.id));
       }
       if (req.query.sort == "top") {
       }
@@ -154,44 +154,31 @@ router.post("/v1/like", function(req, res, next) {
   );
 });
 
-router.post("/v1/follow", function(req, res, next) {
-  db.findOne({ id: req.session.user.id }, (err, user) => {
-    let foundUser = user.openFollowers.find(
-      x => (x.login || x.username) == req.body.username
+router.post("/v1/follow", function (req, res, next) {
+  console.log(req.body.username);
+  db.findOne({ username: req.body.username }, (err, user) => {
+    let foundUser = user.friendlyFollowers.find(
+      x => x.username == req.session.user.username
     );
     if (foundUser) {
-      user.openFollowers.splice(user.openFollowers.indexOf(foundUser), 1);
+      var foundUserIndex = _.findIndex(user.friendlyFollowers, { username : req.session.user.username });
+      user.friendlyFollowers = user.friendlyFollowers.splice(foundUserIndex, 1);
       user = User(user);
       user.save(function() {
         res.send({ followed: false, msg: "Un-Followed!" });
       });
       return;
     } else {
-      fetch("https://api.github.com/users/" + req.body.username, function(
-        err,
-        resGH
-      ) {
-        if (err || !resGH)
-          return res.status(500).send(err || "Could not find user");
-        user.openFollowers.push(resGH);
-        db.findOne({ id: resGH.id }, function(err, u) {
-          if (u) {
-            u.notifications.push({
-              id: Math.random(),
-              msg: `${req.session.user.username} started following you.`,
-              link: `/u/@${data[i].username}`,
-              time: new Date()
-            });
-            u = User(u);
-            u.save();
-          }
-          console.log("u", u);
-          console.log("user", user);
-          user = User(user);
-          user.save(err => {
-            res.status(200).send({ followed: true, msg: "Followed!" });
-          });
-        });
+      user.friendlyFollowers.push(req.session.user);
+      user.notifications.push({
+        id: Math.random(),
+        msg: `${req.session.user.username} started following you.`,
+        link: `/u/@${req.session.user.username}`,
+        time: new Date()
+      });
+      console.log(user);
+      user.save(err => {
+        res.status(200).send({ followed: true, msg: "Followed!" });
       });
     }
   });
@@ -205,16 +192,11 @@ router.get("/v1/search", function(req, res, next) {
     distance: 100,
     maxPatternLength: 32,
     minMatchCharLength: 1,
-    keys: ["username", "name", "languages", "repos.repo", "repos.owner"]
+    keys: ["username", "name"]
   };
-  User.find({}, function(err, users) {
-    users.forEach(x => {
-      let langs = [];
-      x.languages.forEach(l => {
-        Object.keys(l).forEach(la => langs.push(la));
-      });
-      x.languages = langs;
-    });
+  User.find({}, function (err, users) {
+    var sessionUserIndex = _.findIndex({ username: req.session.user.username });
+    users = users.splice(sessionUserIndex, 1);
     var fuse = new Fuse(users, options);
     if (!req.query || !req.query.q) {
       return res.send(users);

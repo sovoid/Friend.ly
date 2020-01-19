@@ -3,37 +3,42 @@
   <%- include('../head') -%>
   <body ng-app="">
     <%- include("../navbar") %>
-    <br>
-    <div class="container" style="margin-top:9rem">
-    <input type="text" id="search-box" style="margin-bottom: 2%" class="form-control" onkeyup="updateList(this.value, 'search');" placeholder="Search here..." />
-
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-primary">Total Users</li>
-           <li class="list-group-item">
-            Total <b><%= list.length %></b> user<%= list.length != 1 ? "s have" : " has" %> signed up.
-         </li>
-
-   </ul>
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-primary">Results <img style="display:none" id="searchLoad" height="22" src="/images/logo.gif"></li>
-      <div id="user-list">
-      <% for(var i=0;i<list.length && i != 10;i++) { %>
-         <li class="list-group-item">
-            <img src="<%= list[i].profile_picture %>" class="logo">
-            <b><a href="/u/@<%= list[i].username %>" id="list-username"><%= list[i].username %></a></b>
-         </li>
-      <% } %>
+    <div id="mainPage" style="height: 100%;">
+      <%- include('../sidebar2') -%>
+      <div class="column col-xs-12 col-sm-9 col-lg-10" style="margin:auto" id="main">
+        <div class="row">
+          <div class="col-md-12">
+            <input type="text" id="search-box" style="margin-bottom: 2%" class="form-control" onkeyup="updateList(this.value, 'search');" placeholder="Search here..." />
+        
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-primary">Total Users</li>
+                  <li class="list-group-item">
+                    Total <b><%= list.length %></b> user<%= list.length != 1 ? "s have" : " has" %> signed up.
+                </li>
+        
+            </ul>
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-primary">Results <img style="display:none" id="searchLoad" height="22" src="/images/logo.gif"></li>
+              <div id="user-list">
+              <% for(var i=0;i<list.length;i++) { %>
+                <li class="list-group-item">
+                    <img src="<%= list[i].profile_picture %>" class="logo">
+                    <b><a href="/u/@<%= list[i].username %>" id="list-username"><%= list[i].username %></a></b>
+                </li>
+              <% } %>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-   </ul>
-   </div>
 
     <div id="notify_message" class=" notify_message-success">
-    	<center>Search for people on Openfuel...</center>
+    	<center>Search for people on Friendly...</center>
     </div>
     <%- include('../tabs') -%>
     <%- include('../footer') -%>
   </body>
-   <script type="text/javascript" src="/javascripts/dom.js"></script>
    <script type="text/javascript" src="/javascripts/search.js"></script>
 
 </html>

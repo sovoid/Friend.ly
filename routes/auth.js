@@ -3,15 +3,14 @@ var router = express.Router();
 var db = require("../utils/handlers/user");
 var formParser = require("../utils/form-parser.js");
 var passport = require("passport");
-
 var User = require("../utils/models/user");
 
 //PS: Passport stuff to be done below...
-router.get("/github", passport.authenticate("github"));
+router.get("/twitter", passport.authenticate("twitter"));
 
 router.get(
-  "/github/callback",
-  passport.authenticate("github", { failureRedirect: "/err" }),
+  "/twitter/callback",
+  passport.authenticate("twitter", { failureRedirect: "/err" }),
   function(req, res) {
     // Successful authentication, redirect home.
     req.session.user = req.session.passport.user;

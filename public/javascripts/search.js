@@ -22,12 +22,7 @@ function updateList(query, type) {
                <img src="${data[i].profile_picture}" class="logo">
                <b><a href="/u/@${data[i].username}" id="list-username">  ${
           data[i].username
-        }</a> ${data[i].languages
-          .map(
-            l =>
-              `<span class="label label-info"><a href="/u?lang=${l}">${l}</a></span>`
-          )
-          .join(" ")}</b>
+        }</a></b>
             </li>`);
       }
       $("#searchLoad").fadeOut();

@@ -29,6 +29,7 @@
     "googleapis": "^47.0.0",
     "guid": "0.0.12",
     "http-errors": "~1.7.3",
+    "ibm-watson": "^5.3.0",
     "lodash": "^4.17.15",
     "mocha": "^7.0.0",
     "mongoose": "^5.8.7",
@@ -46,6 +47,7 @@
     "socket.io": "^2.3.0",
     "socket.io-adapter-mongo": "^2.0.5",
     "time-ago": "0.2.1",
+    "twit": "^2.2.11",
     "underscore": "^1.9.2"
   },
   "devDependencies": {},

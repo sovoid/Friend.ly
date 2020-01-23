@@ -31,7 +31,7 @@ app.set("view engine", "ejs");
 require("./utils/handlers/twitter");
 
 const cooky = {
-  secret: "work hard",
+  secret: "high fren",
   resave: true,
   expires: new Date() * 60 * 60 * 24 * 7,
   saveUninitialized: true,

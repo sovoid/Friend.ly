@@ -21,7 +21,14 @@ var userSchema = mongoose.Schema({
   following: Number,
   notifications: Array,
   firstname: String,
-  lastname: String
+  lastname: String,
+  bigFive: {
+    o: Number,
+    c: Number,
+    e: Number,
+    a: Number,
+    n: Number
+  }
 });
 
 // methods ======================

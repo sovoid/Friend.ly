@@ -1,9 +1,10 @@
+require("dotenv").config();
 const PersonalityInsightsV3 = require('ibm-watson/personality-insights/v3');
 const { IamAuthenticator } = require('ibm-watson/auth');
 const personalityInsights = new PersonalityInsightsV3({
-  authenticator: new IamAuthenticator({ apikey: 'wT_Y2y3fjSTgkQtMsf6C1REEEgmfiVlqggEzfSyZridJ' }),
-  version: '2016-10-19',
-  url: 'https://gateway-wdc.watsonplatform.net/personality-insights/api'
+  authenticator: new IamAuthenticator({ apikey: process.env.WATSON_API_KEY }),
+  version: process.env.WATSON_API_VERSION,
+  url: process.env.WATSON_URL
 });
            
 /**

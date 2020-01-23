@@ -58,7 +58,7 @@ if (process.env.NODE_ENV == "production") {
 }
 app.set("trust proxy", 1); // trust first proxy
 app.use(app.sessionMiddleware);
-app.use(logger("tiny"));
+// app.use(logger("tiny"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

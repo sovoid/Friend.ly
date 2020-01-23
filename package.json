@@ -47,7 +47,7 @@
     "request": "2.88.0",
     "socket.io": "^2.3.0",
     "socket.io-adapter-mongo": "^2.0.5",
-    "time-ago": "0.2.1",
+    "time-ago": "^0.2.1",
     "twit": "^2.2.11",
     "underscore": "^1.9.2"
   },

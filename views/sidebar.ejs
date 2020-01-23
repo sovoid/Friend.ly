@@ -11,6 +11,22 @@
   <div class="row">
     <div class="col-lg-12 no-pad-left no-pad-right">
       <ul class="list-group">
+        <li class="list-group-item list-group-item-primary">
+          Get friend.ly with
+        </li>
+        <% for(var i=0;i<(people.length) && i<5;i++) { %>
+        <% if(user.username !== people[i].username) { %>
+        <li class="list-group-item">
+          <img
+            src="<%= people[i].profile_picture %>"
+            class="logo"
+          />
+          <a href="/u/@<%= people[i].username %>"><%= people[i].username %></a>
+        </li>
+        <% } %>
+        <% } %>
+      </ul>
+      <ul class="list-group">
         <li class="list-group-item list-group-item-primary">Action</li>
         <li class="list-group-item">
           <i class="fa fa-search"></i>&nbsp;
@@ -60,22 +76,6 @@
           <i class="fa fa-power-off"></i>&nbsp;
           <a href="/account/out">log out</a>
         </li>
-      </ul>
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-primary">
-          People you might know
-        </li>
-        <% for(var i=0;i<(people.length/2);i++) { %>
-        <% if(user.username !== people[i].username) { %>
-        <li class="list-group-item">
-          <img
-            src="<%= people[i].profile_picture %>"
-            class="logo"
-          />
-          <a href="/u/@<%= people[i].username %>"><%= people[i].username %></a>
-        </li>
-        <% } %>
-        <% } %>
       </ul>
     </div>
   </div>

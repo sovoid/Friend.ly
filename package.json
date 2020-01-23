@@ -15,6 +15,7 @@
     "compression": "^1.7.4",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.4",
+    "correlation-rank": "^0.2.0",
     "debug": "~4.1.1",
     "dotenv": "^8.2.0",
     "ejs": "~3.0.1",

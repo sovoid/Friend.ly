@@ -20,10 +20,10 @@
             <ul class="list-group">
               <li class="list-group-item list-group-item-primary">Results <img style="display:none" id="searchLoad" height="22" src="/images/logo.gif"></li>
               <div id="user-list">
-              <% for(var i=0;i<list.length;i++) { %>
+              <% for(var user of list) { %>
                 <li class="list-group-item">
-                    <img src="<%= list[i].profile_picture %>" class="logo">
-                    <b><a href="/u/@<%= list[i].username %>" id="list-username"><%= list[i].username %></a></b>
+                    <img src="<%= user.profile_picture %>" class="logo">
+                    <b><a href="/u/@<%= user.username %>" id="list-username"><%= user.username %></a></b>
                 </li>
               <% } %>
               </div>

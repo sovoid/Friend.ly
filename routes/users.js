@@ -8,6 +8,7 @@ var formParser = require("../utils/form-parser");
 /* GET users listing. */
 router.get("/", function(req, res, next) {
   db.getAll((err, users) => {
+    console.log(users);
     res.render("user/list", {
       title: req.app.conf.name,
       list: users

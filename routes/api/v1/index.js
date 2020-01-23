@@ -195,8 +195,6 @@ router.get("/v1/search", function(req, res, next) {
     keys: ["username", "name"]
   };
   User.find({}, function (err, users) {
-    var sessionUserIndex = _.findIndex({ username: req.session.user.username });
-    users = users.splice(sessionUserIndex, 1);
     var fuse = new Fuse(users, options);
     if (!req.query || !req.query.q) {
       return res.send(users);

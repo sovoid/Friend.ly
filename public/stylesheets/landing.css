@@ -3355,11 +3355,12 @@ body {
 	-ms-align-items: center;
 	align-items: center;
 	padding: 4em 0 2em 0;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url("../../images/friendly2.gif");
+	/* background-color: #0f3b47; */
+	/* background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url("../../images/friendly2.gif");
 	background-position: center;
 	background-size: cover;
-	background-attachment: fixed;
-	height: calc(100vh - 3.125em);
+	background-attachment: fixed; */
+	/* height: calc(100vh - 3.125em); */
 	min-height: 30em;
 	text-align: center;
 }
@@ -3534,7 +3535,7 @@ body {
 	}
 
 	#banner .button {
-		min-width: 15em;
+		min-width: 8em;
 	}
 
 	#banner:after {
@@ -4575,7 +4576,7 @@ body {
 
 	}
 
-	.box {
+	.form-box {
 		width: 300px;
 		padding: 40px;
 		margin: auto;
@@ -4583,7 +4584,7 @@ body {
 		border: none;
 	}
 
-	.box input[type="text"], .box input[type="password"] {
+	.form-box input[type="text"], .form-box input[type="password"] {
 		border: 0;
 		background: none;
 		margin: auto;
@@ -4598,7 +4599,7 @@ body {
 		width: 200px;
 	}
 
-	.box input[type="text"]:focus, .box input[type="password"]:focus {
+	.form-box input[type="text"]:focus, .form-box input[type="password"]:focus {
 		border-color: #2ecc71;
 	}
 

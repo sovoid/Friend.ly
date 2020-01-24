@@ -8,7 +8,8 @@
   <body>
     <%- include('navbar') -%>
     <div class="landing-main">
-    <!-- Banner -->
+		<!-- Banner -->
+			<div id="particles-js""></div>
 			<section id="banner">
 				<div class="inner">
 					<h2 class="major special">
@@ -18,37 +19,37 @@
 					</h2>
 					<!--<p>to organizations adopting Opensource</p>-->
 					<ul class="actions special stacked">
-						<li><a href="account/twitter" class="button primary large">
+						<li><a href="account/twitter" style="background-color: #00acee" class="button primary large">
 								<span class="icon solid brands fa-twitter"></span>
-								Get started</a>
+								</a>
+								<a href="account/twitter" style="background-color: #3b5998" class="button primary large">
+									<span class="icon solid brands fa-facebook-f"></span>
+								</a>
+								<a href="account/twitter" style="background-color: #1aa260" class="button primary large">
+									<span class="icon solid brands fa-google"></span>
+								</a>
 						</li>
-						<li><a href="account/twitter" class="button primary large">
-							<span class="icon solid brands fa-google"></span>
-							Get started</a>
+						<!-- <li><a href="#one"><span class="icon solid major fa-angle-down"></span></a></li> -->
+						<li style="background: rgba(72,72,72,0.7); border: 2px solid #f9c038;">
+							<form class="form-box" action="/account/getin" method="post" enctype="multipart/form-data">
+								<div class="form-group">
+										<label class="text-muted">Username</label>
+										<input type="text" placeholder="your_user_name" class="form-control" name="username" required>
+								</div>
+								<div class="form-group">
+										<label class="text-muted">Password</label>
+										<input type="password" placeholder="the_secret" class="form-control" name="password" required>
+								</div>
+								<button type="submit" class="btn btn-action btn-warning">GET ME IN</button>
+							</form>
+							<hr>
+							<span class="text-muted">No Account? <a href="/account/new">Get one now!</a> </span>	
 						</li>
-						<li><a href="account/twitter" class="button primary large">
-							<span class="icon solid brands fa-facebook-f"></span>
-							Get started</a>
-						</li>
-						<li><a href="#one"><span class="icon solid major fa-angle-down"></span></a></li>
 					</ul>
 				</div>
 			</section>
 			<!-- One -->
 			<section id="one" class="wrapper alt style2">
-				<form class="box" action="/account/getin" method="post" enctype="multipart/form-data">
-					<div class="form-group">
-							<label class="text-muted">Username</label>
-							<input type="text" placeholder="your_user_name" class="form-control" name="username" required>
-					</div>
-					<div class="form-group">
-							<label class="text-muted">Password</label>
-							<input type="password" placeholder="the_secret" class="form-control" name="password" required>
-					</div>
-					<button type="submit" class="btn btn-action btn-warning">GET ME IN</button>
-				</form>
-			<hr>
-			<span class="text-muted">No Account? <a href="/account/new">Get one now!</a> </span>
 			</section>
 		</div>	
 		<%- include('footer') -%>
@@ -64,5 +65,66 @@
 	<script src="javascripts/main.js"></script>
 	<script src="javascripts/jquery.scrolly.min.js"></script>
 	<script src="javascripts/util.js"></script>
+	<script type="text/javascript" src="javascripts/particles.min.js"></script>
+	<script type="text/javascript">
+	particlesJS("particles-js", {
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: false
+          },
+          onclick: {
+            enable: false
+          },
+          resize: true
+        }
+      },
+      events: {
+        onresize: {
+          enable: true,
+          density_auto: true,
+          density_area: 400 // nb_particles = particles.nb * (canvas width *  canvas height / 1000) / density_area
+        },
+        onclick: {
+          enable: false
+        }
+      },
+      particles: {
+        number: { value: 25, density: { enable: true, value_area: 400 } },
+        color: { value: ["#f9f8eb", "#76b39d", "#155263", "#f0b917", "#7f3b42"] },
+        shape: {
+          type: "circle",
+          stroke: { width: 0, color: "#fff" },
+          polygon: { nb_sides: 5 }
+        },
+        opacity: {
+          value: 0.7,
+          random: false,
+          anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+        },
+        line_linked: {
+          enable: false
+        },
+        size: {
+          value: 10,
+          random: true,
+          anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+        },
+        move: {
+          enable: true,
+          speed: 7,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: true,
+          attract: { enable: false, rotateX: 600, rotateY: 1200 }
+        }
+      },
+      retina_detect: true
+    });
+  
+	</script>
 </html>
 

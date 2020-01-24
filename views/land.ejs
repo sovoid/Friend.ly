@@ -5,7 +5,6 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/landing.css" />
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css" />
-  
   <body>
     <%- include('navbar') -%>
     <div class="landing-main">
@@ -13,7 +12,7 @@
 			<section id="banner">
 				<div class="inner">
 					<h2 class="major special">
-						<span class="landing-headline">
+						<span>
 							Your vibe attracts your tribe
 						</span>
 					</h2>
@@ -23,13 +22,33 @@
 								<span class="icon solid brands fa-twitter"></span>
 								Get started</a>
 						</li>
+						<li><a href="account/twitter" class="button primary large">
+							<span class="icon solid brands fa-google"></span>
+							Get started</a>
+						</li>
+						<li><a href="account/twitter" class="button primary large">
+							<span class="icon solid brands fa-facebook-f"></span>
+							Get started</a>
+						</li>
 						<li><a href="#one"><span class="icon solid major fa-angle-down"></span></a></li>
 					</ul>
 				</div>
 			</section>
-
 			<!-- One -->
 			<section id="one" class="wrapper alt style2">
+				<form class="box" action="/account/getin" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+							<label class="text-muted">Username</label>
+							<input type="text" placeholder="your_user_name" class="form-control" name="username" required>
+					</div>
+					<div class="form-group">
+							<label class="text-muted">Password</label>
+							<input type="password" placeholder="the_secret" class="form-control" name="password" required>
+					</div>
+					<button type="submit" class="btn btn-action btn-warning">GET ME IN</button>
+				</form>
+			<hr>
+			<span class="text-muted">No Account? <a href="/account/new">Get one now!</a> </span>
 			</section>
 		</div>	
 		<%- include('footer') -%>

@@ -31,7 +31,7 @@ passport.use(
         access_token:         token,
         access_token_secret:  tokenSecret
       });
-      User.findOne({ id: profile.id }).exec((err, dbUser) => {
+      User.findOne({ username: profile.username, loginType: "twitter" }).exec((err, dbUser) => {
         if (dbUser) {
           return cb(null, dbUser);
         } else {
@@ -67,6 +67,7 @@ passport.use(
                 a: resp.agreeableness,
                 n: resp.neuroticism
               },
+              loginType: "twitter"
             });
             console.log(newUser);
             newUser.save((err, done) => {

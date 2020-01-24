@@ -4,6 +4,7 @@ var User = require("../models/user");
 var bcrypt = require("bcrypt-nodejs");
 const a = require("array-tools");
 const _ = require("lodash/_arrayIncludes");
+const guid = require("guid");
 
 mongoose.connect(require("../../config/app").db.connectionUri, {
   useNewUrlParser: true,
@@ -33,24 +34,29 @@ usage:
 *****/
 function createNew(obj, cb) {
   if (checkSpace(obj.username)) {
-    return cb(null, false);
+    return cb("Usernames cannot contain spaces.", null);
   } else {
-    User.findOne({ username: obj.username }).exec((err, user) => {
+    User.findOne({ $or: [{ username: obj.username, logType: "friendly" }, { email: obj.email, logType: "friendly" }] }).exec((err, user) => {
       if (user) {
-        return cb(null, false);
+        return cb("The username/email already exists.", null);
       } else {
-        var bio = `Hey there! I'm ${obj.fn} ;)! Wish me on ${obj.day} ${obj.month}`;
-        var dob = obj.day + " " + obj.month + " " + obj.year;
+        var bio = "Hey there! I'm using Friend.ly";
         var newUser = new User({
           username: obj.username,
-          firstname: obj.fn,
-          lastname: obj.ln,
-          dob: dob,
+          firstname: obj.firstname,
+          lastname: obj.lastname,
+          email: obj.email,
+          name: obj.firstname + " " + obj.lastname,
           bio: bio,
-          profile_pic: "/images/logo/logo.png",
+          profile_picture: "/images/logo/logo.png",
+          id: guid.raw(),
           posts: [],
-          followers: [],
-          lastLogin: new Date()
+          followers: 0,
+          following: 0,
+          friendlyFollowers: [],
+          notifications: [],
+          created_at: Date.now(),
+          logType: "friendly"
         });
         newUser.password = newUser.generateHash(obj.password);
         newUser.save((err, res) => {

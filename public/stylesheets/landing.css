@@ -3578,13 +3578,13 @@ body {
 
 	}
 
-	@media screen and (max-width: 980px) {
+	/* @media screen and (max-width: 980px) {
 
 		#banner {
 			height: calc(100vh - 44px);
 		}
 
-	}
+	} */
 
 	@media screen and (max-width: 736px) {
 

@@ -1,12 +1,12 @@
 
 <!DOCTYPE html>
 <html>
-  <%- include('head') -%>
-  <link rel="stylesheet" type="text/css" href="stylesheets/landing.css" />
+  <%- include('../head') -%>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/landing.css" />
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css" />
   <body>
-    <%- include('navbar') -%>
+    <%- include('../navbar') -%>
     <div class="landing-main">
 		<!-- Banner -->
 			<div id="particles-js""></div>
@@ -19,31 +19,34 @@
 					</h2>
 					<!--<p>to organizations adopting Opensource</p>-->
 					<ul class="actions special stacked">
-						<li><a href="account/twitter" style="background-color: #00acee" class="button primary large">
-								<span class="icon solid brands fa-twitter"></span>
-								</a>
-								<a href="account/twitter" style="background-color: #3b5998" class="button primary large">
-									<span class="icon solid brands fa-facebook-f"></span>
-								</a>
-								<a href="account/twitter" style="background-color: #1aa260" class="button primary large">
-									<span class="icon solid brands fa-google"></span>
-                </a>
-						</li>
-						<!-- <li><a href="#one"><span class="icon solid major fa-angle-down"></span></a></li> -->
 						<li style="background: rgba(72,72,72,0.7); border: 2px solid #f9c038;">
-							<form class="form-box" action="/account/getin" method="post" enctype="multipart/form-data">
+              <form class="form-box" action="/account/new" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label class="text-muted">First Name<span class="required">*</span></label>
+                  <input type="text" placeholder="your_first_name" class="form-control" name="firstname" required>
+                  <label class="text-muted">Last Name<span class="required">*</span></label>
+                  <input type="text" placeholder="your_last_name" class="form-control" name="name" required>
+                </div>
+                <div class="form-group">
+                  <label class="text-muted">Username<span class="required">*</span></label>
+                  <input type="text" placeholder="your_user_name" class="form-control" name="username" required>
+                </div>
+                <div class="form-group">
+                  <label class="text-muted">Email<span class="required">*</span></label>
+                  <input type="text" placeholder="your_email" class="form-control" name="email" required>
+                </div>
 								<div class="form-group">
-										<label class="text-muted">Username</label>
-										<input type="text" placeholder="your_user_name" class="form-control" name="username" required>
-								</div>
-								<div class="form-group">
-										<label class="text-muted">Password</label>
+										<label class="text-muted">Password<span class="required">*</span></label>
 										<input type="password" placeholder="the_secret" class="form-control" name="password" required>
-								</div>
-								<button type="submit" class="btn btn-action btn-warning">GET ME IN</button>
+                </div>
+                <div class="form-group">
+                  <label class="text-muted">Confirm Password<span class="required">*</span></label>
+                  <input type="password" placeholder="confirm_the_secret" class="form-control" name="password2" required>
+                </div>
+								<button type="submit" class="btn btn-action btn-warning">CREATE ACCOUNT</button>
 							</form>
 							<hr>
-							<span class="text-muted">No Account? <a href="/account/new">Get one now!</a> </span>	
+							<span class="text-muted">Already a member? <a href="/">Sign in now!</a> </span>	
 						</li>
 					</ul>
 				</div>
@@ -52,20 +55,20 @@
 			<section id="one" class="wrapper alt style2">
 			</section>
 		</div>	
-		<%- include('footer') -%>
+		<%- include('../footer') -%>
     <div id="notify_message" class="notify_message-success"></div>
   </body>
 
   
   <script src="/animations/jquery-sakura.min.js"></script>
-  <script src="javascripts/classie.js"></script>
-  <script src="javascripts/jquery.min.js"></script>
-  <script src="javascripts/browser.min.js"></script>
-  <script src="javascripts/breakpoints.min.js"></script>
-	<script src="javascripts/main.js"></script>
-	<script src="javascripts/jquery.scrolly.min.js"></script>
-	<script src="javascripts/util.js"></script>
-	<script type="text/javascript" src="javascripts/particles.min.js"></script>
+  <script src="/javascripts/classie.js"></script>
+  <script src="/javascripts/jquery.min.js"></script>
+  <script src="/javascripts/browser.min.js"></script>
+  <script src="/javascripts/breakpoints.min.js"></script>
+	<script src="/javascripts/main.js"></script>
+	<script src="/javascripts/jquery.scrolly.min.js"></script>
+	<script src="/javascripts/util.js"></script>
+	<script type="text/javascript" src="/javascripts/particles.min.js"></script>
 	<script type="text/javascript">
 	particlesJS("particles-js", {
       interactivity: {

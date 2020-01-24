@@ -68,7 +68,7 @@ app.events = [
   {
     title: "Friend.ly",
     text: "Coming soon...",
-    img: "/images/station.png",
+    img: "/images/SPACESTATION.png",
     time: [date, date.setDate(date.getDate() + 1)],
     link: {
       link_url: "#",

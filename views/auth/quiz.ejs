@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+<html>
+  <%- include('../head') -%>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/landing.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css" />
+  <body>
+    <%- include('../navbar') -%>
+    <div class="landing-main">
+		<!-- Banner -->
+			<div id="particles-js""></div>
+			<section id="banner">
+				<div class="inner">
+					<h2 class="major special">
+						<span>
+              Take this fun quiz to help us analyze your personality better!
+            </span>
+          </h2>
+          <h5>
+            <span>
+              Remember, there are no wrong answers. Answer all questions honestly.
+            </span>
+          </h5>
+					<ul class="actions special stacked">
+						<li style="background: rgba(72,72,72,0.7); border: 2px solid #f9c038;">
+              <form class="form-box" action="/account/quiz/" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                  <h4><label class="text-muted">Q1. I'm the life of the party</label></h4>
+                  <select name="answerGroup1" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q2. I feel little concern for others</label></h4>
+                  <select name="answerGroup2" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q3. I am always prepared</label></h4>
+                  <select name="answerGroup3" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q4. I get stressed out easily</label></h4>
+                  <select name="answerGroup4" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+								<div class="form-group">
+                  <h4><label class="text-muted">Q5. I have a rich vocabulary</label></h4>
+                  <select name="answerGroup5" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q6. I don't talk a lot</label></h4>
+                  <select name="answerGroup6" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q7. I am interested in people</label></h4>
+                  <select name="answerGroup7" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q8. I leave my belongs around</label></h4>
+                  <select name="answerGroup8" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q9. I am relaxed most of the time</label></h4>
+                  <select name="answerGroup9" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q10. I have difficulty understanding abstract ideas</label></h4>
+                  <select name="answerGroup10" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q11. I feel comfortable around people</label></h4>
+                  <select name="answerGroup11" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q12. I insult people</label></h4>
+                  <select name="answerGroup12" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q13. I pay attention to details</label></h4>
+                  <select name="answerGroup13" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q14. I worry about things</label></h4>
+                  <select name="answerGroup14" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q15. I have a vivid imagination</label></h4>
+                  <select name="answerGroup15" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q16. I keep in the background</label></h4>
+                  <select name="answerGroup16" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q17. I sympathise with others' feelings</label></h4>
+                  <select name="answerGroup17" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q18. I make a mess of things</label></h4>
+                  <select name="answerGroup18" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q19. I seldom feel blue</label></h4>
+                  <select name="answerGroup19" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q20. I am not interested in abstract ideas</label></h4>
+                  <select name="answerGroup20" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q21. I start conversations</label></h4>
+                  <select name="answerGroup21" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q22. I am not interested in other peoples' problems</label></h4>
+                  <select name="answerGroup22" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q23. I get chores done rightaway</label></h4>
+                  <select name="answerGroup23" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q24. I am easily disturbed</label></h4>
+                  <select name="answerGroup24" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q25. I have excellent ideas</label></h4>
+                  <select name="answerGroup25" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q26. I have little to say</label></h4>
+                  <select name="answerGroup26" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q27. I have a soft heart</label></h4>
+                  <select name="answerGroup27" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q28. I often forget to put things back in their proper place</label></h4>
+                  <select name="answerGroup28" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q29. I get upset easily</label></h4>
+                  <select name="answerGroup29" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q30. I do not have a good imagination</label></h4>
+                  <select name="answerGroup30" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q31. I talk to a lot of different people at parties</label></h4>
+                  <select name="answerGroup31" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q32. I am not really interested in others</label></h4>
+                  <select name="answerGroup32" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q33. I like order</label></h4>
+                  <select name="answerGroup33" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q34. I change my mood a lot</label></h4>
+                  <select name="answerGroup34" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q35. I am quick to understand things</label></h4>
+                  <select name="answerGroup35" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q36. I don't like to draw attention to myself</label></h4>
+                  <select name="answerGroup36" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q37. I take timeout for others</label></h4>
+                  <select name="answerGroup37" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q38. I shirk my duties</label></h4>
+                  <select name="answerGroup38" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q39. I have frequent mood swings</label></h4>
+                  <select name="answerGroup39" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q40. I use difficult words</label></h4>
+                  <select name="answerGroup40" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q41. I don't mind being the center of attention</label></h4>
+                  <select name="answerGroup41" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q42. I feel the emotions of others</label></h4>
+                  <select name="answerGroup42" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q43. I follow a schedule</label></h4>
+                  <select name="answerGroup43" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q44. I get irritated easily</label></h4>
+                  <select name="answerGroup44" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q45. I spend time reflecting on things</label></h4>
+                  <select name="answerGroup45" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q46. I am quiet around strangers</label></h4>
+                  <select name="answerGroup46" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q47. I make people feel at ease</label></h4>
+                  <select name="answerGroup47" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q48. I am excited about my work</label></h4>
+                  <select name="answerGroup48" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q49. I often feel blue</label></h4>
+                  <select name="answerGroup49" required>
+                    <option value="5">Strongly Disagree</option>
+                    <option value="4">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="2">Agree</option>
+                    <option value="1">Strongly Agree</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <h4><label class="text-muted">Q50. I am full of ideas</label></h4>
+                  <select name="answerGroup50" required>
+                    <option value="1">Strongly Disagree</option>
+                    <option value="2">Disagree</option>
+                    <option value="3">Neutral</option>
+                    <option value="4">Agree</option>
+                    <option value="5">Strongly Agree</option>
+                  </select>
+                </div>
+                <input type="hidden" name="username" value="<%= username %>">
+                <input type="hidden" name="loginType" value="<%= loginType %>">
+								<button type="submit" class="btn btn-action btn-warning">SUBMIT</button>
+							</form>
+							<hr>
+							<span class="text-muted">Already a member? <a href="/">Sign in now!</a> </span>	
+						</li>
+					</ul>
+				</div>
+			</section>
+			<!-- One -->
+			<section id="one" class="wrapper alt style2">
+			</section>
+		</div>	
+		<%- include('../footer') -%>
+    <div id="notify_message" class="notify_message-success"></div>
+  </body>
+
+  
+  <script src="/animations/jquery-sakura.min.js"></script>
+  <script src="/javascripts/classie.js"></script>
+  <script src="/javascripts/jquery.min.js"></script>
+  <script src="/javascripts/browser.min.js"></script>
+  <script src="/javascripts/breakpoints.min.js"></script>
+	<script src="/javascripts/main.js"></script>
+	<script src="/javascripts/jquery.scrolly.min.js"></script>
+	<script src="/javascripts/util.js"></script>
+	<script type="text/javascript" src="/javascripts/particles.min.js"></script>
+	<script type="text/javascript">
+	particlesJS("particles-js", {
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: false
+          },
+          onclick: {
+            enable: false
+          },
+          resize: true
+        }
+      },
+      events: {
+        onresize: {
+          enable: true,
+          density_auto: true,
+          density_area: 400 // nb_particles = particles.nb * (canvas width *  canvas height / 1000) / density_area
+        },
+        onclick: {
+          enable: false
+        }
+      },
+      particles: {
+        number: { value: 25, density: { enable: true, value_area: 400 } },
+        color: { value: ["#f9f8eb", "#76b39d", "#155263", "#f0b917", "#7f3b42"] },
+        shape: {
+          type: "circle",
+          stroke: { width: 0, color: "#fff" },
+          polygon: { nb_sides: 5 }
+        },
+        opacity: {
+          value: 0.7,
+          random: false,
+          anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+        },
+        line_linked: {
+          enable: false
+        },
+        size: {
+          value: 10,
+          random: true,
+          anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+        },
+        move: {
+          enable: true,
+          speed: 7,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: true,
+          attract: { enable: false, rotateX: 600, rotateY: 1200 }
+        }
+      },
+      retina_detect: true
+    });
+  
+  </script>
+</html>
+

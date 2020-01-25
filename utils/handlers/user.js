@@ -36,7 +36,7 @@ function createNew(obj, cb) {
   if (checkSpace(obj.username)) {
     return cb("Usernames cannot contain spaces.", null);
   } else {
-    User.findOne({ $or: [{ username: obj.username, logType: "friendly" }, { email: obj.email, logType: "friendly" }] }).exec((err, user) => {
+    User.findOne({ $or: [{ username: obj.username, loginType: "friendly" }, { email: obj.email, loginType: "friendly" }] }).exec((err, user) => {
       if (user) {
         return cb("The username/email already exists.", null);
       } else {
@@ -56,7 +56,7 @@ function createNew(obj, cb) {
           friendlyFollowers: [],
           notifications: [],
           created_at: Date.now(),
-          logType: "friendly"
+          loginType: "friendly"
         });
         newUser.password = newUser.generateHash(obj.password);
         newUser.save((err, res) => {

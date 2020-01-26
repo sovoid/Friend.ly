@@ -6,7 +6,7 @@ var passport = require("passport");
 var User = require("../utils/models/user");
 var validator = require("validator");
 var querystring = require("querystring");
-
+var User = require("../utils/models/user");
 //PS: Passport stuff to be done below...
 router.get("/twitter", passport.authenticate("twitter"));
 
@@ -36,7 +36,6 @@ router.get(
 );
 
 router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/err" }), function (req, res) {
-  
   var query = querystring.stringify({
     "username": req.session.passport.user.username,
     "loginType": "google"
@@ -73,13 +72,6 @@ router.post("/new", formParser, function (req, res, next) {
           "loginType": "friendly"
         });
         res.redirect("/account/quiz?" + query);
-        // res.redirect(
-        //   "/?logged-in=" +
-        //   Math.random()
-        //     .toString()
-        //     .slice(2)
-        //     .slice(0, 5)
-        // );
       }
     })
   }
@@ -94,37 +86,35 @@ router.get("/quiz", function (req, res, next) {
 })
 
 router.post("/quiz", formParser, function (req, res, next) {
-  var o, c, e, a, n;
   function calcBigFive(start) {
     let sum = 0;
     for (let i = start; i <= 50; i = i+5) {
-      sum += Number(req.body[`answerGroup${i - 1}`]);
+      sum += Number(req.body[`answerGroup${i}`]);
     }
     return sum;
   }
-  o = calcBigFive(5)/50;
-  c = calcBigFive(3)/50;
-  e = calcBigFive(1)/50;
-  a = calcBigFive(2)/50;
-  n = calcBigFive(4)/50;
+  
+  var u = req.session.passport.user;
 
-  db.findOne({ username: req.body.username, loginType: req.body.loginType }, function (error, currentUser) {
-    currentUser.bigFive.o = o;
-    currentUser.bigFive.c = c;
-    currentUser.bigFive.e = e;
-    currentUser.bigFive.a = a;
-    currentUser.bigFive.n = n;
-
-    currentUser.save(() => {
-      req.session.user = currentUser;
-      res.redirect(
-          "/?logged-in=" +
-          Math.random()
-            .toString()
-            .slice(2)
-            .slice(0, 5)
-      );
-    })
+  var bigFive = {
+    "o": calcBigFive(5) / 50,
+    "c": calcBigFive(3) / 50,
+    "e": calcBigFive(1) / 50,
+    "a": calcBigFive(2) / 50,
+    "n": calcBigFive(4) / 50 
+  }
+  u["bigFive"] = bigFive;
+  var newUser = new User(u);
+  newUser.save(function (err, result) {
+    req.session.user = result;
+    console.log(req.session.user);
+    res.redirect(
+      "/?logged-in=" +
+      Math.random()
+        .toString()
+        .slice(2)
+        .slice(0, 5)
+    );
   }) 
 })
 

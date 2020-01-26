@@ -100,7 +100,7 @@ passport.use(
           console.log(JSON.stringify(profile));
           var email = profile.emails[0].value;
           var username = email.substr(0, email.lastIndexOf("@"));
-          var newUser = new User({
+          var newUser = {
             username: username,
             email: email,
             token: accessToken,
@@ -120,13 +120,12 @@ passport.use(
             loginType: "google",
             firstname: profile.name.givenName,
             lastname: profile.name.familyName
-          });
-
-          console.log(newUser);
-          newUser.save(function (err, done) {
-            if (err) return cb(err);
-            if (done) return cb(null, done); 
-          })
+          };
+          // newUser.save(function (err, done) {
+          //   if (err) return cb(err);
+          //   if (done) return cb(null, done); 
+          // })
+          return cb(null, newUser)
       } 
     })
   })

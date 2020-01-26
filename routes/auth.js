@@ -10,6 +10,8 @@ var querystring = require("querystring");
 //PS: Passport stuff to be done below...
 router.get("/twitter", passport.authenticate("twitter"));
 
+router.get("/google", passport.authenticate("google", { scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'] }));
+
 router.get("/new", function (req, res, next) {
   res.render("auth/signup", {
     title: req.app.conf.name,
@@ -32,6 +34,16 @@ router.get(
     );
   }
 );
+
+router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/err" }), function (req, res) {
+  
+  var query = querystring.stringify({
+    "username": req.session.passport.user.username,
+    "loginType": "google"
+  });
+
+  res.redirect("/account/quiz?" + query);
+})
 
 router.post("/new", formParser, function (req, res, next) {
   var errMsg = ""
@@ -97,7 +109,6 @@ router.post("/quiz", formParser, function (req, res, next) {
   n = calcBigFive(4)/50;
 
   db.findOne({ username: req.body.username, loginType: req.body.loginType }, function (error, currentUser) {
-    console.log(currentUser);
     currentUser.bigFive.o = o;
     currentUser.bigFive.c = c;
     currentUser.bigFive.e = e;

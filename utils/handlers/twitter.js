@@ -1,8 +1,10 @@
 const TwitterStrategy = require("passport-twitter").Strategy;
+const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const passport = require("passport");
 const User = require("../models/user");
 const getUserTimeLine = require("./bot.js");
 const Twit = require("Twit");
+const guid = require("guid");
 require("dotenv").config();
 
 passport.serializeUser(function(user, done) {
@@ -48,7 +50,7 @@ passport.use(
               username: profile["username"],
               token: token,
               token_secret: tokenSecret,
-              id: profile.id,
+              id: guid.raw(),
               posts: [],
               profile_url: "https://twitter.com/" + profile["screen_name"],
               profile_picture: profile._json["profile_image_url"],
@@ -60,6 +62,7 @@ passport.use(
               friendlyFollowers: [],
               following: profile._json["friends_count"],
               notifications: [],
+              email: profile.email,
               bigFive: {
                 o: resp.openess,
                 c: resp.conscientiousness,
@@ -71,7 +74,7 @@ passport.use(
             });
             console.log(newUser);
             newUser.save((err, done) => {
-              if (err) return cb(err);
+              if (err) return cb(err, null);
               if (done) return cb(null, done);
             });
            }
@@ -81,3 +84,51 @@ passport.use(
     }
   )
 );
+
+passport.use(
+  new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
+  },
+    function (accessToken, refreshToken, profile, cb) {
+      User.findOne({ email: profile.email, loginType: "google" }).exec(function (err, dbUser) {
+        if (dbUser) {
+          return cb(null, dbUser);
+        } else {
+          console.log("New user!");
+          console.log(JSON.stringify(profile));
+          var email = profile.emails[0].value;
+          var username = email.substr(0, email.lastIndexOf("@"));
+          var newUser = new User({
+            username: username,
+            email: email,
+            token: accessToken,
+            token_secret: refreshToken,
+            id: guid.raw(),
+            posts: [],
+            profile_url: "mailto:" + email,
+            profile_picture: profile.photos[0].value,
+            name: profile.displayName,
+            location: profile.location,
+            bio: "Hey there! I am using Friend.ly",
+            created_at: Date.now(),
+            followers: 0,
+            friendlyFollowers: [],
+            following: 0,
+            notifications: [],
+            loginType: "google",
+            firstname: profile.name.givenName,
+            lastname: profile.name.familyName
+          });
+
+          console.log(newUser);
+          newUser.save(function (err, done) {
+            if (err) return cb(err);
+            if (done) return cb(null, done); 
+          })
+      } 
+    })
+  })
+)
+

@@ -86,11 +86,11 @@ function checkUser(obj, cb) {
         if (bool) {
           return cb(null, user);
         } else {
-          return cb(null, false);
+          return cb('Bad username or password.', false);
         }
       });
     } else {
-      return cb(null, false);
+      return cb('User not found.', false);
     }
   });
 }

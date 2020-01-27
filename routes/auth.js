@@ -37,12 +37,44 @@ router.get(
 );
 
 router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/err" }), function (req, res) {
-  var query = querystring.stringify({
-    "username": req.session.passport.user.username,
-    "loginType": "google"
-  });
+  if (req.session.passport.user.exists) {
+    delete req.session.passport.user.exists;
+    req.session.user = req.session.passport.user;
+    res.redirect(
+      "/?logged-in=" +
+      Math.random()
+        .toString()
+        .slice(2)
+        .slice(0, 5)
+    );
+  } else {
+    var query = querystring.stringify({
+      "username": req.session.passport.user.username,
+      "loginType": "google"
+    });
+  
+    res.redirect("/account/quiz?" + query);
+  }
+})
 
-  res.redirect("/account/quiz?" + query);
+router.post("/getin", formParser, function (req, res, next) {
+  db.checkUser(req.body, function (err, user) {
+    if (err) {
+      res.render("/land", {
+        title: req.app.conf.name,
+        error: err
+      });
+    } else {
+      req.session.user = user;
+      res.redirect(
+        "/?logged-in=" +
+        Math.random()
+          .toString()
+          .slice(2)
+          .slice(0, 5)
+      );
+    }
+  })
 })
 
 router.post("/new", formParser, function (req, res, next) {

@@ -92,8 +92,9 @@ passport.use(
     callbackURL: process.env.GOOGLE_CALLBACK_URL
   },
     function (accessToken, refreshToken, profile, cb) {
-      User.findOne({ email: profile.email, loginType: "google" }).exec(function (err, dbUser) {
+      User.findOne({ email: profile.emails[0].value, loginType: "google" }).exec(function (err, dbUser) {
         if (dbUser) {
+          dbUser.exists = true;
           return cb(null, dbUser);
         } else {
           console.log("New user!");

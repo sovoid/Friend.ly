@@ -7,6 +7,7 @@ var User = require("../utils/models/user");
 var validator = require("validator");
 var querystring = require("querystring");
 var User = require("../utils/models/user");
+var _ = require("lodash");
 //PS: Passport stuff to be done below...
 router.get("/twitter", passport.authenticate("twitter"));
 
@@ -67,6 +68,7 @@ router.post("/new", formParser, function (req, res, next) {
           error: error
         });
       } else {
+        _.set(req.session, ['passport', 'user'], result);
         var query = querystring.stringify({
           "username": result.username,
           "loginType": "friendly"
@@ -93,8 +95,6 @@ router.post("/quiz", formParser, function (req, res, next) {
     }
     return sum;
   }
-  
-  var u = req.session.passport.user;
 
   var bigFive = {
     "o": calcBigFive(5) / 50,
@@ -103,8 +103,10 @@ router.post("/quiz", formParser, function (req, res, next) {
     "a": calcBigFive(2) / 50,
     "n": calcBigFive(4) / 50 
   }
-  u["bigFive"] = bigFive;
-  var newUser = new User(u);
+  
+  _.set(req.session.passport.user, ['bigFive'], bigFive);
+
+  var newUser = new User(req.session.passport.user);
   newUser.save(function (err, result) {
     req.session.user = result;
     console.log(req.session.user);

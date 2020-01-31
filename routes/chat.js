@@ -5,12 +5,14 @@ var formParser = require("../utils/form-parser");
 var mongoose = require("mongoose");
 var User = require("../utils/models/user");
 var Room = require("../utils/models/room");
+var _ = require("underscore");
 
 router.get("/", function(req, res, next) {
   User.find({}).exec((error, users) => {
+    
     res.render("chat/index", {
       title: req.app.conf.name,
-      users: users
+      users: (users.length >= 50) ? _.sample(users, 50) : users,
     });
   });
 });

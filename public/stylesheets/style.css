@@ -568,5 +568,15 @@ header p {
 
 /* END: css support for footer*/
 .sort-btn.active {
-	color:white
+	color: white;
+}
+
+.back-btn {
+	display: inline-block;
+	vertical-align: center;
+	margin-right: 10px;
+}
+
+.back-btn i {
+	color: black;
 }

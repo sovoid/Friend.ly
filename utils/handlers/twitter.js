@@ -14,9 +14,9 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(id, done) {
   // Find or create a user
   return done(null, {});
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
+  // User.findById(id, function(err, user) {
+  //   done(err, user);
+  // });
 });
 
 passport.use(
@@ -37,10 +37,7 @@ passport.use(
         if (dbUser) {
           return cb(null, dbUser);
         } else {
-          console.log("New user!");
-          console.log(JSON.stringify(profile));
-          getUserTimeLine(TwitterClient, profile["username"], createUser);
-          function createUser(err, resp) {
+          var createUser = function(err, resp) {
             // Error handling for less than 100 word count would go here!
             if (err) {
               console.log("Error fetching big five values!");
@@ -48,7 +45,7 @@ passport.use(
             }
             var newUser = User({
               username: profile["username"],
-              token: token,
+              token,
               token_secret: tokenSecret,
               id: guid.raw(),
               posts: [],
@@ -74,11 +71,17 @@ passport.use(
             });
             console.log(newUser);
             newUser.save((err, done) => {
-              if (err) return cb(err, null);
-              if (done) return cb(null, done);
+              if (err) {
+                return cb(err, null);
+              }
+              if (done) {
+                return cb(null, done);
+              }
             });
            }
-          
+          console.log("New user!");
+          console.log(JSON.stringify(profile));
+          getUserTimeLine(TwitterClient, profile["username"], createUser);          
         }
       });
     }
@@ -103,7 +106,7 @@ passport.use(
           var username = email.substr(0, email.lastIndexOf("@"));
           var newUser = {
             username: username,
-            email: email,
+            email,
             token: accessToken,
             token_secret: refreshToken,
             id: guid.raw(),
@@ -126,7 +129,7 @@ passport.use(
           //   if (err) return cb(err);
           //   if (done) return cb(null, done); 
           // })
-          return cb(null, newUser)
+          return cb(null, newUser);
       } 
     })
   })

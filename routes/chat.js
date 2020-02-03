@@ -18,7 +18,7 @@ router.get("/", function(req, res, next) {
 });
 
 router.get("/:userid", function(req, res, next) {
-  if (req.session.user.id == req.params.userid)
+  if (req.session.user.id === req.params.userid)
     return res.render("error", {
       message: "Can't chat with yourself...",
       error: {

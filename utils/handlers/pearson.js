@@ -12,12 +12,14 @@ function pearsonCorrelation(prefs, p1, p2) {
   var si = [], i;
 
   for (var key in prefs[p1]) {
-    if (prefs[p2][key]) si.push(key);
+    if (prefs[p2][key]) {
+      si.push(key);
+    }
   }
 
   var n = si.length;
 
-  if (n == 0) {
+  if (n === 0) {
     return 0;
   }
 
@@ -50,7 +52,7 @@ function pearsonCorrelation(prefs, p1, p2) {
   var den = Math.sqrt((sum1Sq - Math.pow(sum1, 2) / n) *
       (sum2Sq - Math.pow(sum2, 2) / n));
 
-  if (den == 0) return 0;
+  if (den === 0) return 0;
 
   return num / den;
 }

@@ -45,8 +45,9 @@ router.get("/threat", (req, res, next) => {
 });
 
 router.post("/event", (req, res, next) => {
-  if (req.body.key !== process.env.API_KEY)
+  if (req.body.key !== process.env.API_KEY) {
     return res.json({ success: false, error: "Inavlid API Key" });
+  }
   var date = new Date();
   var payload = {
     text: req.body.text,
@@ -66,7 +67,7 @@ router.post("/event", (req, res, next) => {
       link_url: payload.link.link_url,
       link_text: payload.link.link_text
     },
-    type: function() {
+    type() {
       if (alertTypes.includes(payload.type)) {
         return payload.type;
       }
@@ -80,7 +81,9 @@ router.post("/event", (req, res, next) => {
 });
 
 router.get("/v1/posts", function(req, res) {
-  if (!req.session.user) res.sendStatus(404);
+  if (!req.session.user) {
+    res.sendStatus(404);
+  }
   req.query.sort =
     req.query.sort.split(" ").length > 1
       ? req.query.sort.split(" ")[1]
@@ -93,10 +96,10 @@ router.get("/v1/posts", function(req, res) {
       }
       let posts = [];
       if (req.query.sort === "feed") {
-        results = results.filter(u => user.friendlyFollowers.find(f => f == u.id));
+        results = results.filter((u) => user.friendlyFollowers.find((f) => f === u.id));
       }
-      if (req.query.sort === "top") {
-      }
+      // if (req.query.sort === "top") {
+      // }
       results.forEach(function(res) {
         res.access_token = null;
         res.posts.forEach(post => {
@@ -157,7 +160,6 @@ router.post("/v1/like", function(req, res, next) {
 });
 
 router.post("/v1/follow", function (req, res, next) {
-  console.log(req.body.username);
   db.findOne({ username: req.body.username }, (err, user) => {
     let foundUser = user.friendlyFollowers.find(
       (x) => x.username === req.session.user.username
@@ -204,11 +206,6 @@ router.get("/v1/search", function(req, res, next) {
     let searched = fuse.search(req.query.q);
     return res.send(searched);
   });
-});
-
-router.get("/v1/oauth/:service", function(req, res, next) {
-  if (req.params.service === "instagram") res.redirect(ig.auth_url);
-  if (req.params.service === "google") res.redirect(g.auth_url);
 });
 
 router.get("/v1/notifications", function(req, res, next) {

@@ -16,22 +16,7 @@ function checkSpace(name) {
   //console.log(charSplit)
   return _(charSplit, " ");
 }
-/*****
-usage:
-	var opt = {
-		username:'my_name',
-		password:'P@sSW0rD',
-		fn:'Divy',
-		ln:'Srivastava',
-		day:23,
-		month:'July',
-		year:2004
-	}
-	createNew(opt, (error, result)=> {
-		if(!result) return false;
-		// Do some post-save stuff here
-	})
-*****/
+
 function createNew(obj, cb) {
   if (checkSpace(obj.username)) {
     return cb("Username cannot contain spaces.", null);
@@ -88,11 +73,11 @@ function checkUser(obj, cb) {
         if (bool) {
           return cb(null, user);
         } else {
-          return cb('Bad username or password.', false);
+          return cb("Bad username or password.", false);
         }
       });
     } else {
-      return cb('User not found.', false);
+      return cb("User not found.", false);
     }
   });
 }
@@ -160,7 +145,7 @@ function deleteOne(opt, cb) {
   User.deleteOne(opt).exec((err, res) => {
     if (err) {
       return cb(err, null);
-    } else if (res.n == 0) {
+    } else if (res.n === 0) {
       return cb(null, true);
     }
   });
@@ -172,7 +157,7 @@ function comment(user, comment, _id, cb) {
     }
     console.log(obj);
     for (var i = 0; i < obj.posts.length; i++) {
-      if (obj.posts[i]._id == _id) {
+      if (obj.posts[i]._id === _id) {
         obj.posts[i].comments.push(comment);
         obj.notifications.push({
           id: Math.random(),
@@ -193,8 +178,8 @@ function like(user, like, _id, cb) {
     //	if (!obj) return cb("Does not exist.",null);
     //console.log(obj);
     let liked;
-    let post = obj.posts.find(x => x._id == _id);
-    if (post.likes.find(x => x == like.by)) {
+    let post = obj.posts.find((x) => x._id === _id);
+    if (post.likes.find((x) => x === like.by)) {
       post.likes.splice(post.likes.indexOf(like.by), 1);
     } else {
       liked = true;

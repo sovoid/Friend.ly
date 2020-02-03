@@ -2,11 +2,28 @@ var express = require("express");
 var router = express.Router();
 var httpRequest = require("request");
 var apiKeyGen = require("apikeygen").apikey;
-
 var db = require("../../utils/handlers/user");
 var formParser = require("../../utils/form-parser.js");
 var User = require("../../utils/models/user");
 var Keys = require("../../utils/models/keys");
+
+function genAPIKey(cb) {
+  var key = apiKeyGen();
+  cb({
+    apiKey: key
+  });
+  /** Keys.findOne({apiKey:key}).exec((err, dbKey) => {
+        if(dbKey) return cb(false);
+        var newKey = new Keys({
+            apiKey:key,
+            stats:[],
+            invokes:0
+        });
+        newKey.save((err, done) => {
+            cb(done);
+        })
+    })  */
+}
 
 var verified = false;
 var secure_dev_key;
@@ -25,7 +42,9 @@ router.get("/verify/:key", function(req, res, next) {
       userSchema.developer = true;
       userSchema.save((err, result) => {
         Keys.findOne({ apiKey: req.params.key }).exec((err, success) => {
-          if (success) return res.send({ error: "Invalid API KEY" });
+          if (success) {
+            return res.send({ error: "Invalid API KEY" });
+          }
           var newKeySchema = new Keys({
             apiKey: req.params.key,
             invokes: 0,
@@ -45,7 +64,7 @@ router.get("/verify/:key", function(req, res, next) {
 
 router.use(function(req, res, next) {
   console.log(req.query);
-  if (req.url == "/") {
+  if (req.url === "/") {
     if (verified) {
       return next();
     }
@@ -56,7 +75,7 @@ router.use(function(req, res, next) {
   if (!req.query.apiKey) {
     return res.status(405).send({ error: "API KEY not provided." });
   }
-  if (req.query.apiKey == secure_dev_key) {
+  if (req.query.apiKey === secure_dev_key) {
     Keys.findOne({ apiKey: req.query.apiKey }).exec((err, key) => {
       if (!key) {
         return res.status(405).send({ error: "Invalid API KEY provided." });
@@ -91,7 +110,7 @@ router.get("/userInfo", function(req, res, next) {
         "https://localhost:8080" + userDetails.profile_picture;
       var toBeSent = {
         username: userDetails.username,
-        profile_picture: profile_picture,
+        profile_picture,
         dob: userDetails.dob,
         bio: userDetails.bio,
         firstname: userDetails.firstname,
@@ -103,28 +122,11 @@ router.get("/userInfo", function(req, res, next) {
 });
 
 router.post("/generate", function(req, res, next) {
-  genAPIKey(status => {
+  genAPIKey((status) => {
     if (!status)
       return res.send({ error: "Some internal error. Please try again." });
     res.send({ apikey: status.apiKey });
   });
 });
 
-function genAPIKey(cb) {
-  var key = apiKeyGen();
-  cb({
-    apiKey: key
-  });
-  /** Keys.findOne({apiKey:key}).exec((err, dbKey) => {
-        if(dbKey) return cb(false);
-        var newKey = new Keys({
-            apiKey:key,
-            stats:[],
-            invokes:0
-        });
-        newKey.save((err, done) => {
-            cb(done);
-        })
-    })  */
-}
 module.exports = router;

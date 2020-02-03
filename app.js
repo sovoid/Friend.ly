@@ -113,7 +113,9 @@ app.use(function(req, res, next) {
     );
   };
   User.findOne({ id: req.session.user.id }, function(err, user) {
-    if (!user || err) return next();
+    if (!user || err) {
+      return next();
+    }
     let notif = user.notifications.find((x) => x.id === req.query.delete_notif);
     if (!notif) {
       return next();

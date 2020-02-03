@@ -6,7 +6,6 @@ var passport = require("passport");
 var User = require("../utils/models/user");
 var validator = require("validator");
 var querystring = require("querystring");
-var User = require("../utils/models/user");
 var _ = require("lodash");
 //PS: Passport stuff to be done below...
 router.get("/twitter", passport.authenticate("twitter"));
@@ -97,7 +96,7 @@ router.post("/new", formParser, function (req, res, next) {
       if (error && !result) {
         res.render("auth/signup", {
           title: req.app.conf.name,
-          error: error
+          error
         });
       } else {
         _.set(req.session, ["passport", "user"], result);

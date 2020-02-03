@@ -20,7 +20,7 @@ router.get("/settings", function(req, res, next) {
   db.findOne({ _id: req.session.user._id }).exec((err, user) => {
     res.render("me/settings", {
       title: req.app.conf.name,
-      user: user
+      user
     });
   });
 });
@@ -43,7 +43,7 @@ router.get("/post/:action/:query", function(req, res, next) {
       {
         db.findOne({ id: req.session.user.id }).exec((err, u) => {
           let id = req.params.query;
-          if (!u.posts[u.posts.indexOf(u.posts.find((x) => x._id == id))]) {
+          if (!u.posts[u.posts.indexOf(u.posts.find((x) => x._id === id))]) {
             return res.redirect("/");
           }
           console.log(u);
@@ -52,16 +52,13 @@ router.get("/post/:action/:query", function(req, res, next) {
             u.posts[u.posts.indexOf(u.posts.find((x) => x._id === id))].static_url
           ) {
             try {
-              fs.unlinkSync(
-                "./public" +
-                u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))]
-                  .static_url
-              );
+              let static_path = `./public${u.posts[u.posts.indexOf(u.posts.find((x) => x._id === id))].static_url}`;
+              fs.unlinkSync(static_path);
             } catch (err) {
               console.log(err, err.stack);
             }
           }
-          u.posts.splice(u.posts.indexOf(u.posts.find(x => x._id == id)), 1);
+          u.posts.splice(u.posts.indexOf(u.posts.find(x => x._id === id)), 1);
           u.save(err => {
             if (err) throw err;
             console.log("Post deleted");
@@ -84,14 +81,12 @@ router.get("/upload", function(req, res, next) {
 router.post("/upload", formParser, function(req, res, next) {
   // Generate a random id
   var random_id = guid.raw();
-  var final_location = null;
+  var final_location = null, mimeType;
   if (req.files.filetoupload.name) {
     // Assign static_url path
     var oldpath = req.files.filetoupload.path;
     console.log(req.files.filetoupload.name);
-    var type = req.files.filetoupload.name
-      .split(".")
-      [req.files.filetoupload.name.split(".").length - 1].toLowerCase();
+    var type = req.files.filetoupload.name.split(".")[req.files.filetoupload.name.split(".").length - 1].toLowerCase();
     if (file_types.indexOf(type) < 0) {
       return res.status(403).render("error", {
         error: new Error("Only images and videos are allowed for upload!")
@@ -107,7 +102,7 @@ router.post("/upload", formParser, function(req, res, next) {
       `${oldpath} - OldPath\n ${newpath} - Newpath\n ${final_location} - DiskLocation\n`
     );
     // Finally upload the file to disk and save the feed to users profile.
-    var type = mime.lookup(req.files.filetoupload.name).split("/")[1];
+    mimetype = mime.lookup(req.files.filetoupload.name).split("/")[1];
     mv(oldpath, newpath, function(err) {
       console.log("moving files");
     });
@@ -123,7 +118,7 @@ router.post("/upload", formParser, function(req, res, next) {
       category: req.body.type,
       comments: [],
       likes: [],
-      type,
+      type: mimeType,
       createdAt: new Date(),
       lastEditedAt: new Date()
     });
@@ -157,7 +152,9 @@ router.post("/upload/code", (req, res, next) => {
         lastEditedAt: new Date()
       });
       user.save(err => {
-        if (err) throw err;
+        if (err) {
+          throw err;
+        }
         console.log("Gist Saved");
         // Redirect back after the job is done.
         res.redirect("/");

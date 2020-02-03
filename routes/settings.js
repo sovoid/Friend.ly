@@ -78,6 +78,7 @@ router.get("/upload", function(req, res, next) {
     user: req.session.user
   });
 });
+
 router.post("/upload", formParser, function(req, res, next) {
   // Generate a random id
   var random_id = guid.raw();

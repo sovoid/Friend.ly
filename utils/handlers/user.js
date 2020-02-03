@@ -149,24 +149,27 @@ function deleteOne(opt, cb) {
     }
   });
 }
-function comment(user, comment, _id, cb) {
+function comment(user, comment, post_id, cb) {
   User.findOne(user).exec((err, obj) => {
     if (!obj) {
       return cb("Does not exist.", null);
     }
     console.log(obj);
     for (var i = 0; i < obj.posts.length; i++) {
-      if (obj.posts[i]._id === _id) {
+      if (obj.posts[i]._id === post_id) {
         obj.posts[i].comments.push(comment);
         obj.notifications.push({
           id: Math.random(),
           msg: `@${comment.by} reacted to your post.`,
-          link: `/u/@${obj.username}`,
+          link: `/u/@${comment.by}`,
           time: new Date()
         });
         obj = new User(obj);
         obj.save((err, res) => {
-          return cb(err, res);
+          if (err) {
+            return (err, null);
+          }
+          return cb(null, res);
         });
       }
     }

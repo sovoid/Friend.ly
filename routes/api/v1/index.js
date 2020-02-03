@@ -126,17 +126,19 @@ router.get("/v1/posts", function(req, res) {
 });
 
 router.post("/v1/comment", function(req, res, next) {
-  if (!req.session.user) res.status(404).send("Unauthorized");
+  if (!req.session.user) {
+    res.status(404).send("Unauthorized");
+  }
   db.comment(
-    { username: req.body.author },
+    { id: req.body.author },
     { by: req.session.user.username, text: req.body.text },
-    req.body._id,
+    req.body.post_id,
     (err, result) => {
-      if (result) {
-        res.send(true);
-      } else {
-        res.send(false);
+      if (err || !result) {
+        console.log(err);
+        res.json(false);
       }
+      res.json({ by: req.session.user.username }); 
     }
   );
 });

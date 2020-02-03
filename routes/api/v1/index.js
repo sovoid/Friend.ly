@@ -36,7 +36,7 @@ router.use(function(req, res, next) {
 });
 
 router.get("/threat", (req, res, next) => {
-  if (req.params.key == process.env.API_KEY) {
+  if (req.params.key === process.env.API_KEY) {
     res.json({ success: true });
     return process.exit(0);
   } else {
@@ -88,12 +88,14 @@ router.get("/v1/posts", function(req, res) {
   let page = req.query.page || 1;
   db.findOne({ id: req.session.user.id }, function(err, user) {
     db.getAll(function(err, results) {
-      if (err) res.status(500).send(err);
+      if (err) {
+        res.status(500).send(err);
+      }
       let posts = [];
-      if (req.query.sort == "feed") {
+      if (req.query.sort === "feed") {
         results = results.filter(u => user.friendlyFollowers.find(f => f == u.id));
       }
-      if (req.query.sort == "top") {
+      if (req.query.sort === "top") {
       }
       results.forEach(function(res) {
         res.access_token = null;
@@ -102,7 +104,7 @@ router.get("/v1/posts", function(req, res) {
           posts.push({
             author: res,
             post,
-            owner: res.id == req.session.user.id ? true : false
+            owner: res.id === req.session.user.id ? true : false
           });
         });
       });
@@ -158,7 +160,7 @@ router.post("/v1/follow", function (req, res, next) {
   console.log(req.body.username);
   db.findOne({ username: req.body.username }, (err, user) => {
     let foundUser = user.friendlyFollowers.find(
-      x => x.username == req.session.user.username
+      (x) => x.username === req.session.user.username
     );
     if (foundUser) {
       var foundUserIndex = _.findIndex(user.friendlyFollowers, { username : req.session.user.username });
@@ -205,8 +207,8 @@ router.get("/v1/search", function(req, res, next) {
 });
 
 router.get("/v1/oauth/:service", function(req, res, next) {
-  if (req.params.service == "instagram") res.redirect(ig.auth_url);
-  if (req.params.service == "google") res.redirect(g.auth_url);
+  if (req.params.service === "instagram") res.redirect(ig.auth_url);
+  if (req.params.service === "google") res.redirect(g.auth_url);
 });
 
 router.get("/v1/notifications", function(req, res, next) {

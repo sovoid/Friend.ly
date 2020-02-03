@@ -11,7 +11,7 @@ var _ = require("lodash");
 //PS: Passport stuff to be done below...
 router.get("/twitter", passport.authenticate("twitter"));
 
-router.get("/google", passport.authenticate("google", { scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'] }));
+router.get("/google", passport.authenticate("google", { scope: ["https://www.googleapis.com/auth/plus.login", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"] }));
 
 router.get("/new", function (req, res, next) {
   res.render("auth/signup", {
@@ -78,13 +78,13 @@ router.post("/getin", formParser, function (req, res, next) {
 })
 
 router.post("/new", formParser, function (req, res, next) {
-  var errMsg = ""
+  var errMsg = "";
   if (req.body.password !== req.body.password2) {
-    errMsg = "Passwords don't match."
+    errMsg = "Passwords don't match.";
   } else if (!validator.isEmail(req.body.email)) {
-    errMsg = "Invalid email."
+    errMsg = "Invalid email.";
   } else if (validator.isEmpty(req.body.firstname) || validator.isEmpty(req.body.lastname) || validator.isEmpty(req.body.username)) {
-    errMsg = "Username, First Name or Last Name cannot be empty!"
+    errMsg = "Username, First Name or Last Name cannot be empty!";
   }
 
   if (errMsg) {
@@ -100,7 +100,7 @@ router.post("/new", formParser, function (req, res, next) {
           error: error
         });
       } else {
-        _.set(req.session, ['passport', 'user'], result);
+        _.set(req.session, ["passport", "user"], result);
         var query = querystring.stringify({
           "username": result.username,
           "loginType": "friendly"
@@ -133,10 +133,10 @@ router.post("/quiz", formParser, function (req, res, next) {
     "c": calcBigFive(3) / 50,
     "e": calcBigFive(1) / 50,
     "a": calcBigFive(2) / 50,
-    "n": calcBigFive(4) / 50 
-  }
+    "n": calcBigFive(4) / 50
+  };
   
-  _.set(req.session.passport.user, ['bigFive'], bigFive);
+  _.set(req.session.passport.user, ["bigFive"], bigFive);
 
   var newUser = new User(req.session.passport.user);
   newUser.save(function (err, result) {

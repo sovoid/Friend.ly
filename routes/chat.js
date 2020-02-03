@@ -28,17 +28,19 @@ router.get("/:userid", function(req, res, next) {
     });
   require("../utils/handlers/socket");
   User.findOne({ id: req.params.userid }).exec((error, user) => {
-    if (!user) return res.status(404).send("No user found!");
+    if (!user) {
+      return res.status(404).send("No user found!");
+    }
     req.session.socket = {};
     Room.find({}).exec((err, chatRooms) => {
       var chatRoom = chatRooms.find(
-        r =>
+        (r) =>
           r.users[0] &&
           r.users[1] &&
-          ((r.users[0].toString() == user.id.toString() &&
-            r.users[1].toString() == req.session.user.id) ||
-            (r.users[1].toString() == user.id.toString() &&
-              r.users[0].toString() == req.session.user.id))
+          ((r.users[0].toString() === user.id.toString() &&
+            r.users[1].toString() === req.session.user.id) ||
+            (r.users[1].toString() === user.id.toString() &&
+              r.users[0].toString() === req.session.user.id))
       );
       if (chatRoom) {
         req.session.socket.room = chatRoom.id;

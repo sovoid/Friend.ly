@@ -5,7 +5,9 @@ function makeBold(name) {
   if (i1 > -1 && i2 > i1) {
     name = name.replace("*", "<b>").replace("*", "</b>");
     return makeBold(name);
-  } else return name;
+  } else {
+    return name;
+  }
 }
 
 function makeItalic(name) {
@@ -14,7 +16,9 @@ function makeItalic(name) {
   if (i1 > -1 && i2 > i1) {
     name = name.replace("_", "<i>").replace("_", "</i>");
     return makeItalic(name);
-  } else return name;
+  } else {
+    return name;
+  } 
 }
 function newLineParser(str) {
   str = str.replace(/[\n]/g, "<br>");
@@ -30,7 +34,9 @@ function emailParser(str) {
 //console.log(emailParser("DivySrivastava <dj@123.com>"));
 
 module.exports = function(str) {
-  if (!str) return;
+  if (!str) {
+    return;
+  }
   str = makeBold(str);
   str = makeItalic(str);
   str = newLineParser(str);

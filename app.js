@@ -39,9 +39,8 @@ const cooky = {
 };
 
 app.sessionMiddleware = session(cooky);
-if (process.env.NODE_ENV == "production") {
+if (process.env.NODE_ENV === "production") {
   //Production middlewares
-  console.log("Production mode on");
   const compression = require("compression");
   const minify = require("express-minify");
   app.use(compression());
@@ -79,7 +78,7 @@ app.events = [
 app.use(
   express.static(
     path.join(__dirname, "public"),
-    process.env.NODE_ENV == "production"
+    process.env.NODE_ENV === "production"
       ? {
           maxAge: 31557600
         }
@@ -90,7 +89,9 @@ app.use(
 if (process.env.OFFLINE) {
   /** Only For Offline Tests **/
   app.use((req, res, next) => {
-    if (req.url == "/") req.session.user = app.conf.offline;
+    if (req.url === "/") {
+      req.session.user = app.conf.offline;
+    }
     next();
   });
 }
@@ -102,7 +103,9 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req, res, next) {
-  if (!req.query.delete_notif || !req.session.user) return next();
+  if (!req.query.delete_notif || !req.session.user) {
+    return next();
+  }
   next = function() {
     console.log(req.originalUrl);
     return res.redirect(
@@ -111,8 +114,10 @@ app.use(function(req, res, next) {
   };
   User.findOne({ id: req.session.user.id }, function(err, user) {
     if (!user || err) return next();
-    let notif = user.notifications.find(x => x.id == req.query.delete_notif);
-    if (!notif) return next();
+    let notif = user.notifications.find((x) => x.id === req.query.delete_notif);
+    if (!notif) {
+      return next();
+    }
     user.notifications.splice(user.notifications.indexOf(notif), 1);
     user.save(function() {
       next();
@@ -122,7 +127,9 @@ app.use(function(req, res, next) {
 app.use("/", indexRouter);
 app.use("/account", accountRouter);
 app.use(function(req, res, next) {
-  if (req.session.user) return next();
+  if (req.session.user) {
+    return next();
+  }
   res.redirect("/");
 });
 app.use("/u", usersRouter);
@@ -151,7 +158,7 @@ app.use(function(err, req, res, next) {
 });
 
 setTimeout(() => {
-  if (process.argv.find(x => x == "--test")) {
+  if (process.argv.find(x => x === "--test")) {
     return process.exit(0);
   }
 }, 2000);

@@ -28,7 +28,6 @@ function sendMsg(socket, chat) {
       id: u.id
     };
     room.chats.push({ txt: chat.txt, by: user, time });
-    console.log({ txt: chat.txt, by: user, time });
 
     room.save((err, obj) => {
       sio.to(socket.session.socket.room).emit("new msg", {
@@ -37,7 +36,7 @@ function sendMsg(socket, chat) {
         time
       });
       //userData.notifications
-      let otherUser = room.users.find(x => x != u.id);
+      let otherUser = room.users.find((x) => x !== u.id);
       User.findOne({ id: otherUser }).exec(function(err, otherU) {
         otherU.notifications.push({
           id: Math.random(),

@@ -20,7 +20,7 @@ genAPIKey(function(key) {
 });
 
 router.get("/verify/:key", function(req, res, next) {
-  if (req.params.key == secure_dev_key) {
+  if (req.params.key === secure_dev_key) {
     User.findOne({ _id: req.session._id }).exec((err, userSchema) => {
       userSchema.developer = true;
       userSchema.save((err, result) => {
@@ -46,15 +46,21 @@ router.get("/verify/:key", function(req, res, next) {
 router.use(function(req, res, next) {
   console.log(req.query);
   if (req.url == "/") {
-    if (verified) return next();
-    else return res.redirect("/");
+    if (verified) {
+      return next();
+    }
+    else {
+      return res.redirect("/");
+    }
   }
-  if (!req.query.apiKey)
+  if (!req.query.apiKey) {
     return res.status(405).send({ error: "API KEY not provided." });
+  }
   if (req.query.apiKey == secure_dev_key) {
     Keys.findOne({ apiKey: req.query.apiKey }).exec((err, key) => {
-      if (!key)
+      if (!key) {
         return res.status(405).send({ error: "Invalid API KEY provided." });
+      }
       key.invokes++;
       key.stats.push({
         time: new Date(),
@@ -78,9 +84,11 @@ router.get("/", function(req, res, next) {
 router.get("/userInfo", function(req, res, next) {
   if (req.query.username) {
     User.findOne({ username: req.query.username }).exec((err, userDetails) => {
-      if (!userDetails) return res.status(404);
+      if (!userDetails) {
+        return res.status(404);
+      }
       var profile_picture =
-        "https://openfuel.divy.work" + userDetails.profile_picture;
+        "https://localhost:8080" + userDetails.profile_picture;
       var toBeSent = {
         username: userDetails.username,
         profile_picture: profile_picture,

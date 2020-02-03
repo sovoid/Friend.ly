@@ -19,7 +19,7 @@ router.get("/", function(req, res, next) {
         var friendlyFollowers = [];
         underscore.each(users, function (user) {
           let similarityIndex = pearsonCorrelation([Object.values(req_user.bigFive), Object.values(user.bigFive)], 0, 1);
-          if (similarityIndex >= 0.6 && !underscore.find(user.friendlyFollowers, eachFollower => eachFollower.id === req_user.id)) {
+          if (similarityIndex >= 0.6 && !underscore.find(user.friendlyFollowers, (eachFollower) => eachFollower.id === req_user.id)) {
             user["similarityIndex"] = similarityIndex;
             suggestedUsers.push(user);
           }

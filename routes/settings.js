@@ -43,21 +43,24 @@ router.get("/post/:action/:query", function(req, res, next) {
       {
         db.findOne({ id: req.session.user.id }).exec((err, u) => {
           let id = req.params.query;
-          if (!u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))]) {
+          if (!u.posts[u.posts.indexOf(u.posts.find((x) => x._id == id))]) {
             return res.redirect("/");
           }
           console.log(u);
           if (
-            u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))] &&
-            u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))].static_url
-          )
+            u.posts[u.posts.indexOf(u.posts.find((x) => x._id === id))] &&
+            u.posts[u.posts.indexOf(u.posts.find((x) => x._id === id))].static_url
+          ) {
             try {
               fs.unlinkSync(
                 "./public" +
-                  u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))]
-                    .static_url
+                u.posts[u.posts.indexOf(u.posts.find(x => x._id == id))]
+                  .static_url
               );
-            } catch (err) {}
+            } catch (err) {
+              console.log(err, err.stack);
+            }
+          }
           u.posts.splice(u.posts.indexOf(u.posts.find(x => x._id == id)), 1);
           u.save(err => {
             if (err) throw err;
@@ -81,6 +84,7 @@ router.get("/upload", function(req, res, next) {
 router.post("/upload", formParser, function(req, res, next) {
   // Generate a random id
   var random_id = guid.raw();
+  var final_location = null;
   if (req.files.filetoupload.name) {
     // Assign static_url path
     var oldpath = req.files.filetoupload.path;
@@ -88,7 +92,6 @@ router.post("/upload", formParser, function(req, res, next) {
     var type = req.files.filetoupload.name
       .split(".")
       [req.files.filetoupload.name.split(".").length - 1].toLowerCase();
-    console.log(type);
     if (file_types.indexOf(type) < 0) {
       return res.status(403).render("error", {
         error: new Error("Only images and videos are allowed for upload!")
@@ -98,7 +101,7 @@ router.post("/upload", formParser, function(req, res, next) {
       __dirname,
       `../public/feeds/${req.session.user.username}_${random_id}.${type}`
     );
-    var final_location = `/feeds/${req.session.user.username}_${random_id}.${type}`;
+    final_location = `/feeds/${req.session.user.username}_${random_id}.${type}`;
 
     console.log(
       `${oldpath} - OldPath\n ${newpath} - Newpath\n ${final_location} - DiskLocation\n`
@@ -108,9 +111,8 @@ router.post("/upload", formParser, function(req, res, next) {
     mv(oldpath, newpath, function(err) {
       console.log("moving files");
     });
-  } else {
-    final_location = null;
   }
+  
   db.findOne({ id: req.session.user.id }).exec((err, u) => {
     u.posts.push({
       _id: random_id,
@@ -121,12 +123,12 @@ router.post("/upload", formParser, function(req, res, next) {
       category: req.body.type,
       comments: [],
       likes: [],
-      type: type,
+      type,
       createdAt: new Date(),
       lastEditedAt: new Date()
     });
     u = new db(u);
-    u.save(err => {
+    u.save((err) => {
       if (err) throw err;
       console.log("Post saved");
       // Redirect back after the job is done.

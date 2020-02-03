@@ -9,7 +9,7 @@
  *  @return {float}  The pearson correlation score.
  */
 function pearsonCorrelation(prefs, p1, p2) {
-  var si = [];
+  var si = [], i;
 
   for (var key in prefs[p1]) {
     if (prefs[p2][key]) si.push(key);
@@ -17,26 +17,32 @@ function pearsonCorrelation(prefs, p1, p2) {
 
   var n = si.length;
 
-  if (n == 0) return 0;
+  if (n == 0) {
+    return 0;
+  }
 
   var sum1 = 0;
-  for (var i = 0; i < si.length; i++) sum1 += prefs[p1][si[i]];
+  for (i = 0; i < si.length; i++) {
+    sum1 += prefs[p1][si[i]];
+  }
 
   var sum2 = 0;
-  for (var i = 0; i < si.length; i++) sum2 += prefs[p2][si[i]];
+  for (i = 0; i < si.length; i++) {
+    sum2 += prefs[p2][si[i]];
+  }
 
   var sum1Sq = 0;
-  for (var i = 0; i < si.length; i++) {
+  for (i = 0; i < si.length; i++) {
     sum1Sq += Math.pow(prefs[p1][si[i]], 2);
   }
 
   var sum2Sq = 0;
-  for (var i = 0; i < si.length; i++) {
+  for (i = 0; i < si.length; i++) {
     sum2Sq += Math.pow(prefs[p2][si[i]], 2);
   }
 
   var pSum = 0;
-  for (var i = 0; i < si.length; i++) {
+  for (i = 0; i < si.length; i++) {
     pSum += prefs[p1][si[i]] * prefs[p2][si[i]];
   }
 

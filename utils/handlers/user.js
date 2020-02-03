@@ -47,8 +47,8 @@ function createNew(obj, cb) {
           lastname: obj.lastname,
           email: obj.email,
           name: obj.firstname + " " + obj.lastname,
-          bio: bio,
-          profile_picture: "/images/logo/logo.png",
+          bio,
+          profile_picture: "/images/user_man.png",
           id: guid.raw(),
           posts: [],
           followers: 0,
@@ -80,7 +80,9 @@ usage:
 function checkUser(obj, cb) {
   User.findOne({ username: obj.username, loginType: "friendly" }).exec((err, user) => {
     console.log(user);
-    if (err) return cb(err, false);
+    if (err) {
+      return cb(err, false);
+    }
     if (user) {
       bcrypt.compare(obj.password, user.password, (err, bool) => {
         if (bool) {
@@ -108,7 +110,9 @@ usage:
 
 function findOne(obj, cb) {
   User.findOne(obj).exec((err, user) => {
-    if (err) return cb(err, false);
+    if (err) {
+      return cb(err, false);
+    } 
     if (user) {
       return cb(err, user);
     } else {
@@ -119,7 +123,9 @@ function findOne(obj, cb) {
 
 function search(opt, cb) {
   User.find({ username: { $gt: opt } }).exec((err, results) => {
-    if (err) return cb(err, false);
+    if (err) {
+      return cb(err, false);
+    }
     if (results) {
       return cb(err, results);
     } else {
@@ -138,7 +144,9 @@ usage:
 
 function getAll(cb) {
   User.find({}).exec((err, users) => {
-    if (err) return cb(err, false);
+    if (err) {
+      return cb(err, false);
+    }
     if (users) {
       return cb(null, users);
     } else {
@@ -150,15 +158,18 @@ function getAll(cb) {
 function deleteOne(opt, cb) {
   //if(typeof opt !== Object) cb("Must be a javascript object.");
   User.deleteOne(opt).exec((err, res) => {
-    if (err) return cb(err, null);
-    else if (res.n == 0) {
+    if (err) {
+      return cb(err, null);
+    } else if (res.n == 0) {
       return cb(null, true);
     }
   });
 }
 function comment(user, comment, _id, cb) {
   User.findOne(user).exec((err, obj) => {
-    if (!obj) return cb("Does not exist.", null);
+    if (!obj) {
+      return cb("Does not exist.", null);
+    }
     console.log(obj);
     for (var i = 0; i < obj.posts.length; i++) {
       if (obj.posts[i]._id == _id) {
@@ -196,7 +207,7 @@ function like(user, like, _id, cb) {
       });
     }
     obj = new User(obj);
-    obj.save(err => {
+    obj.save((err) => {
       cb(err, true, post.likes.length, liked);
     });
   });
@@ -204,11 +215,11 @@ function like(user, like, _id, cb) {
 
 // Expose all the api...
 module.exports = {
-  createNew: createNew,
-  checkUser: checkUser,
-  findOne: findOne,
-  getAll: getAll,
-  comment: comment,
-  like: like,
-  search: search
+  createNew,
+  checkUser,
+  findOne,
+  getAll,
+  comment,
+  like,
+  search
 };

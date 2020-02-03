@@ -5,6 +5,7 @@
   <%- include('../head') -%>
     <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css">
     <link type="text/css" rel="stylesheet" media="screen" href="/animations/jquery-sakura.min.css" />
+    <script src="/javascripts/emojiPicker.js"></script>
   <body>
     	<div class="container-fluid navbar-fixed-top box-shadow" style="background-color:#fff; margin-bottom:2rem">
         <br>
@@ -57,12 +58,13 @@
     </div>
     </div>
     <div class="container">
-      <input type="text" class="form-control" id="msg" placeholder="Type something...">
+      <input type="text" class="form-control" data-emoji-picker="true" id="msg" placeholder="Type something...">
     </div><br><br><br><br>
     <%- include('../tabs') %>
   </body>
   <script src="/javascripts/socket.io.js" charset="utf-8"></script>
   <script type="text/javascript">
+  emojiPicker.initiate();
   scrollingElement = (document.scrollingElement || document.body);
   function scrollSmoothToBottom (id) {
    $(scrollingElement).animate({

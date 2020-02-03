@@ -3,7 +3,7 @@ const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const passport = require("passport");
 const User = require("../models/user");
 const getUserTimeLine = require("./bot.js");
-const Twit = require("Twit");
+const Twit = require("twit");
 const guid = require("guid");
 require("dotenv").config();
 

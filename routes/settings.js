@@ -58,7 +58,7 @@ router.get("/post/:action/:query", function(req, res, next) {
               console.log(err, err.stack);
             }
           }
-          u.posts.splice(u.posts.indexOf(u.posts.find(x => x._id === id)), 1);
+          u.posts.splice(u.posts.indexOf(u.posts.find((x) => x._id === id)), 1);
           u.save(err => {
             if (err) throw err;
             console.log("Post deleted");
@@ -102,7 +102,7 @@ router.post("/upload", formParser, function(req, res, next) {
       `${oldpath} - OldPath\n ${newpath} - Newpath\n ${final_location} - DiskLocation\n`
     );
     // Finally upload the file to disk and save the feed to users profile.
-    mimetype = mime.lookup(req.files.filetoupload.name).split("/")[1];
+    mimeType = mime.lookup(req.files.filetoupload.name).split("/")[1];
     mv(oldpath, newpath, function(err) {
       console.log("moving files");
     });

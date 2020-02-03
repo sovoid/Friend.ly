@@ -59,10 +59,7 @@ router.get("/google/callback", passport.authenticate("google", { failureRedirect
 router.post("/getin", formParser, function (req, res, next) {
   db.checkUser(req.body, function (err, user) {
     if (err) {
-      res.render("/land", {
-        title: req.app.conf.name,
-        error: err
-      });
+      res.redirect("/?error=" + err);
     } else {
       req.session.user = user;
       res.redirect(
@@ -138,6 +135,10 @@ router.post("/quiz", formParser, function (req, res, next) {
   _.set(req.session.passport.user, ["bigFive"], bigFive);
 
   var newUser = new User(req.session.passport.user);
+  if (newUser.loginType === "friendly") {
+    newUser.password = newUser.generateHash(newUser.password);
+  }
+
   newUser.save(function (err, result) {
     req.session.user = result;
     console.log(req.session.user);

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <%- include('head') -%>
@@ -9,7 +8,7 @@
     <%- include('navbar') -%>
     <div class="landing-main">
 		<!-- Banner -->
-			<div id="particles-js""></div>
+			<div id="particles-js"></div>
 			<section id="banner">
 				<div class="inner">
 					<h2 class="major special">
@@ -28,9 +27,9 @@
                 <a href="account/google" style="background-color: #1aa260" class="button primary large">
 									<span class="icon solid brands fa-google"></span>
                 </a>
-								<a href="account/instagram" style="background: #d6249f;" class="button primary large">
+								<!-- <a href="account/instagram" style="background: #d6249f;" class="button primary large">
 									<span class="icon solid brands fa-instagram"></span>
-                </a>
+                </a> -->
 						</li>
 						<!-- <li><a href="#one"><span class="icon solid major fa-angle-down"></span></a></li> -->
 						<li style="background: rgba(72,72,72,0.7); border: 2px solid #f9c038;">
@@ -57,6 +56,9 @@
 		</div>	
 		<%- include('footer') -%>
     <div id="notify_message" class="notify_message-success"></div>
+    <% if(error) { %>
+      <script>show_notification("<%= error%>", "danger");</script>
+    <% } %>
   </body>
 
   
@@ -128,6 +130,8 @@
       retina_detect: true
     });
   
-	</script>
+  </script>
+  <script>
+  </script>
 </html>
 

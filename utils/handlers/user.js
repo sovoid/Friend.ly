@@ -21,7 +21,7 @@ function createNew(obj, cb) {
   if (checkSpace(obj.username)) {
     return cb("Username cannot contain spaces.", null);
   } else {
-    User.findOne({ $or: [{ username: obj.username, loginType: "friendly" }, { email: obj.email, loginType: "friendly" }] }).exec((err, user) => {
+    User.findOne({ $or: [{ username: obj.username, loginType: "friendly" }, { email: obj.email }] }).exec((err, user) => {
       if (user) {
         return cb("The username/email already exists.", null);
       } else {
@@ -64,7 +64,6 @@ usage:
 
 function checkUser(obj, cb) {
   User.findOne({ username: obj.username, loginType: "friendly" }).exec((err, user) => {
-    console.log(user);
     if (err) {
       return cb(err, false);
     }
@@ -99,7 +98,7 @@ function findOne(obj, cb) {
       return cb(err, false);
     } 
     if (user) {
-      return cb(err, user);
+      return cb(null, user);
     } else {
       return cb(null, false);
     }

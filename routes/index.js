@@ -39,7 +39,7 @@ router.get("/", function(req, res, next) {
   } else {
     res.render("land", {
       title: req.app.conf.name,
-      error: false
+      error: (req.query.error) || false
     });
   }
 });

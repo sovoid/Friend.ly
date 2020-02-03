@@ -16,9 +16,9 @@
   <p align="center">
     A friend-recommendation system that utilizes sentiment analysis and personality trait extraction for recommendations!
     <br />
-    <a href="https://github.com/AlQaholic007/GitJob/issues">Report Bug</a>
+    <a href="https://github.com/AlQaholic007/Friend.ly/issues">Report Bug</a>
     ·
-    <a href="https://github.com/AlQaholic007/GitJob/issues">Feature Request</a>
+    <a href="https://github.com/AlQaholic007/Friend.ly/issues">Feature Request</a>
   </p>
 </p>
 
@@ -79,7 +79,7 @@ npm install
 1. Clone the repo
 
 ```sh
-git clone https:://github.com/AlQaholic007/GitJob
+git clone https:://github.com/AlQaholic007/Friend.ly
 ```
 
 2. Install NPM packages
@@ -112,7 +112,7 @@ npm start
 
 ## Roadmap
 
-See the [open issues](https://github.com/AlQaholic007/GitJob/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/AlQaholic007/Friend.ly/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 

@@ -59,7 +59,7 @@ router.get("/post/:action/:query", function(req, res, next) {
             }
           }
           u.posts.splice(u.posts.indexOf(u.posts.find((x) => x._id === id)), 1);
-          u.save(err => {
+          u.save((err) => {
             if (err) throw err;
             console.log("Post deleted");
             res.redirect("/");
@@ -124,7 +124,9 @@ router.post("/upload", formParser, function(req, res, next) {
     });
     u = new db(u);
     u.save((err) => {
-      if (err) throw err;
+      if (err) {
+        throw err;
+      }
       console.log("Post saved");
       // Redirect back after the job is done.
       res.redirect("/");
@@ -151,7 +153,7 @@ router.post("/upload/code", (req, res, next) => {
         createdAt: new Date(),
         lastEditedAt: new Date()
       });
-      user.save(err => {
+      user.save((err) => {
         if (err) {
           throw err;
         }

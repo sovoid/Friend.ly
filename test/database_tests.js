@@ -41,7 +41,7 @@ describe("Database Tests", function() {
       var wrongSave = Name({
         notName: "Not Mike"
       });
-      wrongSave.save(err => {
+      wrongSave.save((err) => {
         if (err) {
           return done();
         }

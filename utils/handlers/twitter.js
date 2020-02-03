@@ -37,7 +37,7 @@ passport.use(
         if (dbUser) {
           return cb(null, dbUser);
         } else {
-          var createUser = function(err, resp) {
+          var createUser = function (err, resp) {
             // Error handling for less than 100 word count would go here!
             if (err) {
               console.log("Error fetching big five values!");
@@ -78,7 +78,7 @@ passport.use(
                 return cb(null, done);
               }
             });
-           }
+          };
           console.log("New user!");
           console.log(JSON.stringify(profile));
           getUserTimeLine(TwitterClient, profile["username"], createUser);          
@@ -105,7 +105,7 @@ passport.use(
           var email = profile.emails[0].value;
           var username = email.substr(0, email.lastIndexOf("@"));
           var newUser = {
-            username: username,
+            username,
             email,
             token: accessToken,
             token_secret: refreshToken,
@@ -130,8 +130,8 @@ passport.use(
           //   if (done) return cb(null, done); 
           // })
           return cb(null, newUser);
-      } 
+        }
+      });
     })
-  })
-)
+);
 

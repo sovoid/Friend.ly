@@ -123,8 +123,9 @@ router.get("/userInfo", function(req, res, next) {
 
 router.post("/generate", function(req, res, next) {
   genAPIKey((status) => {
-    if (!status)
+    if (!status) {
       return res.send({ error: "Some internal error. Please try again." });
+    }
     res.send({ apikey: status.apiKey });
   });
 });

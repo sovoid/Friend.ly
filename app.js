@@ -160,7 +160,7 @@ app.use(function(err, req, res, next) {
 });
 
 setTimeout(() => {
-  if (process.argv.find(x => x === "--test")) {
+  if (process.argv.find((x) => x === "--test")) {
     return process.exit(0);
   }
 }, 2000);

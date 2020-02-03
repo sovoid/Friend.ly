@@ -44,41 +44,41 @@ router.get("/threat", (req, res, next) => {
   }
 });
 
-router.post("/event", (req, res, next) => {
-  if (req.body.key !== process.env.API_KEY) {
-    return res.json({ success: false, error: "Inavlid API Key" });
-  }
-  var date = new Date();
-  var payload = {
-    text: req.body.text,
-    title: req.body.title,
-    link: {
-      link_url: req.body.link_url,
-      link_text: req.body.link_text
-    }
-  };
-  console.log(payload);
-  req.app.events.push({
-    text: payload.text,
-    title: payload.title,
-    img: "/images/universe.png",
-    time: [date, date.setDate(date.getDate() + 1)],
-    link: {
-      link_url: payload.link.link_url,
-      link_text: payload.link.link_text
-    },
-    type() {
-      if (alertTypes.includes(payload.type)) {
-        return payload.type;
-      }
-    }
-  });
-  console.log(req.app.events);
-  res.json({
-    success: true,
-    data: req.app.events
-  });
-});
+// router.post("/event", (req, res, next) => {
+//   if (req.body.key !== process.env.API_KEY) {
+//     return res.json({ success: false, error: "Inavlid API Key" });
+//   }
+//   var date = new Date();
+//   var payload = {
+//     text: req.body.text,
+//     title: req.body.title,
+//     link: {
+//       link_url: req.body.link_url,
+//       link_text: req.body.link_text
+//     }
+//   };
+//   console.log(payload);
+//   req.app.events.push({
+//     text: payload.text,
+//     title: payload.title,
+//     img: "/images/universe.png",
+//     time: [date, date.setDate(date.getDate() + 1)],
+//     link: {
+//       link_url: payload.link.link_url,
+//       link_text: payload.link.link_text
+//     },
+//     type() {
+//       if (alertTypes.includes(payload.type)) {
+//         return payload.type;
+//       }
+//     }
+//   });
+//   console.log(req.app.events);
+//   res.json({
+//     success: true,
+//     data: req.app.events
+//   });
+// });
 
 router.get("/v1/posts", function(req, res) {
   if (!req.session.user) {
@@ -116,8 +116,8 @@ router.get("/v1/posts", function(req, res) {
           new Date(two.post.createdAt) - new Date(one.post.createdAt)
       );
       posts = posts.slice(
-        page == 1 ? 0 : 10 * (page - 1),
-        page == 1 ? 10 : undefined
+        page === 1 ? 0 : 10 * (page - 1),
+        page === 1 ? 10 : undefined
       );
       res.status(200).send(posts);
       user.save();
@@ -142,7 +142,9 @@ router.post("/v1/comment", function(req, res, next) {
 });
 
 router.post("/v1/like", function(req, res, next) {
-  if (!req.session.user) res.status(404).send("Unauthorized");
+  if (!req.session.user) {
+    res.status(404).send("Unauthorized");
+  }
   console.log(req.body);
   db.like(
     { id: req.body.author },

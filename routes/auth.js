@@ -74,7 +74,7 @@ router.post("/getin", formParser, function (req, res, next) {
       );
     }
   })
-})
+});
 
 router.post("/new", formParser, function (req, res, next) {
   var errMsg = "";
@@ -108,7 +108,7 @@ router.post("/new", formParser, function (req, res, next) {
       }
     })
   }
-})
+});
 
 router.get("/quiz", function (req, res, next) {
   res.render("auth/quiz", {
@@ -116,12 +116,12 @@ router.get("/quiz", function (req, res, next) {
     username: req.query.username,
     loginType: req.query.loginType
   });
-})
+});
 
 router.post("/quiz", formParser, function (req, res, next) {
   function calcBigFive(start) {
     let sum = 0;
-    for (let i = start; i <= 50; i = i+5) {
+    for (let i = start; i <= 50; i = i + 5) {
       sum += Number(req.body[`answerGroup${i}`]);
     }
     return sum;
@@ -148,8 +148,8 @@ router.post("/quiz", formParser, function (req, res, next) {
         .slice(2)
         .slice(0, 5)
     );
-  }) 
-})
+  })
+});
 
 router.get("/out", function(req, res, next) {
   req.session.destroy(() => {

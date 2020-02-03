@@ -46,4 +46,4 @@ function getUserTimeLine(TwitterClient ,twitterhandle, cb) {
 }
 
 
-module.exports = getUserTimeLine
+module.exports = getUserTimeLine;

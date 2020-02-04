@@ -103,7 +103,7 @@ router.post("/new", formParser, function (req, res, next) {
         });
         res.redirect("/account/quiz?" + query);
       }
-    })
+    });
   }
 });
 

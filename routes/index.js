@@ -25,7 +25,6 @@ router.get("/", function(req, res, next) {
         });
 
         getUserTone(req.session.user, function (err, mood) {
-          console.log(mood);
           res.render("index", {
             user: req_user,
             title: req.app.conf.name,

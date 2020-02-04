@@ -149,7 +149,7 @@ router.post("/quiz", formParser, function (req, res, next) {
         .slice(2)
         .slice(0, 5)
     );
-  })
+  });
 });
 
 router.get("/out", function(req, res, next) {

@@ -102,7 +102,7 @@ router.get("/v1/posts", function(req, res) {
       // }
       results.forEach(function(res) {
         res.access_token = null;
-        res.posts.forEach(post => {
+        res.posts.forEach((post) => {
           post.timeago = ta.ago(post.createdAt);
           posts.push({
             author: res,
@@ -185,7 +185,7 @@ router.post("/v1/follow", function (req, res, next) {
         time: new Date()
       });
       console.log(user);
-      user.save(err => {
+      user.save((err) => {
         res.status(200).send({ followed: true, msg: "Followed!" });
       });
     }

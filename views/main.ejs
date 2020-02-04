@@ -1,14 +1,12 @@
 
 <div class="column col-xs-12 col-sm-9 col-lg-10" style="margin:auto" id="main">
-   <% for(var y=0;y<events.length;y++) { %>
-  <ul class="list-group" style="background-color:black;background-image: url('<%= events[y].img %>');background-size: cover;background-repeat: no-repeat;border-radius:10px;">
+  <ul class="list-group" style="background-color:rgb(58,67,143); border-radius:5px;">
     <li class="list-group-item list-group-item-primary" style="background: transparent; color:#fff;">
-        <h3><%- events[y].title %></h3>
-      <h4><%- events[y].text %></h4>
-     <a class="float-right" style="color:#fff"  href="<%= events[y].link.link_url %>"><%= events[y].link.link_text %></a> <br>
+        <h3><%= events.large %></h3>
+        <i><a class="float-right" style="color:#fff"><%= events.small %></a></i> <br>
+      <br>
      </li>
   </ul>
- <% } %>
  
  <div class="row">
   <div class="col-md-12">

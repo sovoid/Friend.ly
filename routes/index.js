@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var user = require("../utils/handlers/user");
+var { getUserTone } = require("../utils/handlers/bot");
 var array_tools = require("array-tools");
 const Prism = require("prismjs");
 const pearsonCorrelation = require("../utils/handlers/pearson");
@@ -10,11 +11,6 @@ router.get("/", function(req, res, next) {
   if (req.session.user) {
     user.getAll((err, users) => {
       user.findOne({ id: req.session.user.id }, (error, req_user) => {
-        req.app.events.map((a, b) => {
-          if (a.time[1] < new Date()) {
-            req.app.events.slice(a);
-          }
-        });
         var suggestedUsers = [];
         var friendlyFollowers = [];
         underscore.each(users, function (user) {
@@ -27,13 +23,16 @@ router.get("/", function(req, res, next) {
         suggestedUsers = underscore.sortBy(suggestedUsers, function iteratee(user) {
           return user.similarityIndex;
         });
-        console.log(suggestedUsers);
-        res.render("index", {
-          user: req_user,
-          title: req.app.conf.name,
-          people: suggestedUsers.reverse(),
-          events: req.app.events
-        });
+
+        getUserTone(req.session.user, function (err, mood) {
+          console.log(mood);
+          res.render("index", {
+            user: req_user,
+            title: req.app.conf.name,
+            people: suggestedUsers.reverse(),
+            events: mood
+          });
+         });
       });
     });
   } else {

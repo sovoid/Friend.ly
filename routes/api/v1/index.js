@@ -117,7 +117,7 @@ router.get("/v1/posts", function(req, res) {
       );
       posts = posts.slice(
         page === 1 ? 0 : 10 * (page - 1),
-        page === 1 ? 10 : null
+        page === 1 ? 10 : undefined
       );
       res.status(200).send(posts);
       user.save();

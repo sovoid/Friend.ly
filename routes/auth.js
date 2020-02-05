@@ -70,7 +70,7 @@ router.post("/getin", formParser, function (req, res, next) {
           .slice(0, 5)
       );
     }
-  })
+  });
 });
 
 router.post("/new", formParser, function (req, res, next) {

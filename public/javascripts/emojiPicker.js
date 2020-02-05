@@ -32,6 +32,7 @@ class EmojiPicker {
     emojiInput.style.width = "100%";
 
     const emojiContainer = document.createElement("div");
+    emojiContainer.id = "emojiContainer";
     emojiContainer.style.position = "relative";
 
     const parent = emojiInput.parentNode;
@@ -68,7 +69,7 @@ class EmojiPicker {
 
     const emojiTrigger = document.createElement("a");
     emojiTrigger.style.position = "absolute";
-    emojiTrigger.style.top = "25%";
+    emojiTrigger.style.top = "30%";
     emojiTrigger.style.right = "5px";
     emojiTrigger.style.textDecoration = "none";
     emojiTrigger.setAttribute("href", "javascript:void(0)");

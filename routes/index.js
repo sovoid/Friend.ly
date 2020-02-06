@@ -11,6 +11,7 @@ router.get("/", function(req, res, next) {
   if (req.session.user) {
     user.getAll((err, users) => {
       user.findOne({ id: req.session.user.id }, (error, req_user) => {
+        users = underscore.reject(users, (user) => user.id === req.session.user.id);
         var suggestedUsers = [];
         var friendlyFollowers = [];
         underscore.each(users, function (user) {
@@ -24,7 +25,7 @@ router.get("/", function(req, res, next) {
           return user.similarityIndex;
         });
 
-        getUserTone(req.session.user, function (err, mood) {
+        getUserTone(req_user, function (err, mood) {
           res.render("index", {
             user: req_user,
             title: req.app.conf.name,

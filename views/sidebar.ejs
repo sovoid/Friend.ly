@@ -14,6 +14,13 @@
         <li class="list-group-item list-group-item-primary">
           Get friend.ly with
         </li>
+        <% if(people.length == 0) { %>
+        <li class="list-group-item">
+          <i style="color: #bdff01;">You have a personality like 🧂 in that its presence is not felt
+             but its absence makes everything tasteless.
+          </i>
+        </li>
+        <% } else { %>
         <% for(var i=0;i<(people.length) && i<5;i++) { %>
         <% if(user.username !== people[i].username) { %>
         <li class="list-group-item">
@@ -23,6 +30,7 @@
           />
           <a href="/u/@<%= people[i].username %>"><%= people[i].username %></a>
         </li>
+        <% } %>
         <% } %>
         <% } %>
       </ul>

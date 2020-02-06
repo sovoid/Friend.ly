@@ -28,7 +28,7 @@ const messageObj = {
     small: "and singing baby shark todoodo 🦈."
   },
   Joy: {
-    large: "Seems like you've got galaxies inside of you 🌌🌌...",
+    large: "Seems like you've got galaxies inside of you ✨✨...",
     small: "keep smiling 😇."
   },
   Disgust: {

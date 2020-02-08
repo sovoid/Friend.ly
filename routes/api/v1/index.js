@@ -96,7 +96,7 @@ router.get("/v1/posts", function(req, res) {
       }
       let posts = [];
       if (req.query.sort === "feed") {
-        results = results.filter((u) => user.friendlyFollowers.find((f) => f === u.id));
+        results = results.filter((u) => u.friendlyFollowers.find((f) => f === user.id));
       }
       // if (req.query.sort === "top") {
       // }

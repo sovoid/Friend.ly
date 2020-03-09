@@ -17,6 +17,41 @@ router.get("/", function(req, res, next) {
   });
 });
 
+router.post("/user_rating", function (req, res, next) {
+  if (req.session.user.id === req.params.userid) {
+    return res.render("error", {
+      message: "Can't rate yourself...",
+      error: {
+        status: 400,
+        stack: "Can't rate yourself."
+      }
+    })
+  } else {
+    User.findOne({ id: req.body.user }).exec((err, user) => {
+      if (!user.rating.value) {
+        user.rating.value = parseInt(req.body.rating);
+      } else {
+        user.rating.value = Math.floor(((user.rating.value * user.rating.count) + req.body.rating) / (count + 1));
+      }
+      user.rating.count += 1;
+      Room.find({ id: req.body.chatRoomId }).exec((err, room) => {
+        room.rating.push(req.session.user.id);
+        room.save((err, savedRoom) => {
+          user.save((err, savedUser) => {
+            req.session.socket.room = savedRoom.id;
+            res.render("chat/room", {
+              title: req.app.conf.name,
+              room: savedRoom,
+              session: req.session.user,
+              reciever: savedUser
+            });
+          })
+        })
+      })
+    })
+  }
+})
+
 router.get("/:userid", function(req, res, next) {
   if (req.session.user.id === req.params.userid) {
     return res.render("error", {

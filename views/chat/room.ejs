@@ -4,8 +4,53 @@
 <html>
   <%- include('../head') -%>
     <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/rating.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link type="text/css" rel="stylesheet" media="screen" href="/animations/jquery-sakura.min.css" />
     <script src="/javascripts/emojiPicker.js"></script>
+    <style>
+          /* The Modal (background) */
+    .modal {
+      display: block; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    </style>
+ 
   <body>
     	<div class="container-fluid navbar-fixed-top box-shadow" style="background-color:#fff; margin-bottom:2rem">
         <br>
@@ -28,6 +73,45 @@
           </div>
         </div>
       <% } %>
+      <% if(room.chats.length > 50 && room.rating.indexOf(session.id) === -1) { %>
+                <!-- Modal -->
+                <div id="myModal" class="modal">
+
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <span id="close" class="close">&times;</span>
+                    <h2>Rate your experience with this user</h2>
+                    <p>Your rating will help improve our recommendations!</p>
+                    <form method="POST" action="/user_rating">
+                      <div class="form-group">
+                        <fieldset class="rating">
+                          <input type="radio" id="star10" name="rating" value="10" /><label class = "full" for="star10" title="Excellent experience"></label>
+                          <input type="radio" id="star9" name="rating" value="9" /><label class = "full" for="star9" title="Amazing experience"></label>
+                          <input type="radio" id="star8" name="rating" value="8" /><label class = "full" for="star8" title="Great experience"></label>
+                          <input type="radio" id="star7" name="rating" value="7" /><label class = "full" for="star7" title="Very Good experience"></label>
+                          <input type="radio" id="star6" name="rating" value="6" /><label class = "full" for="star6" title="Good experience"></label>
+                          <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Okay experience"></label>
+                          <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Poor experience"></label>
+                          <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Bad experience"></label>
+                          <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Very bad experience"></label>
+                          <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Not upto expecations"></label>
+                        <br>
+                        </fieldset>
+                        <input type="hidden" name="user" value="<%= reciever.id %>">
+                        <input type="hidden" name="chatRoomId" value="<%= room.id %>">
+                      </div>
+                      <div>
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                      
+                  </form>
+                  </div>
+                
+                </div>
+        <!-- /Modal -->
+      <% } %>
   <% for(var i=0;i<room.chats.length;i++) {
     if(room.chats[i].by && room.chats[i].by.profile_picture) { %>
       <!--<div class="col-md-4">
@@ -46,7 +130,6 @@
         <img class="logo" style="height: 30px;width: 30px;" src="<%= room.chats[i].by.profile_picture %>">
         <a href="/u/@<%= room.chats[i].by.username %>"><b><%= room.chats[i].by.username %></b></a><span data-time="<%= room.chats[i].time %>" class="timeSince float-right"><%= timeSince(new Date(room.chats[i].time)) %></span>
         <br><br> <span class="msg"><%= room.chats[i].txt %></span>
-
       </li>
     </ul>
   <% }} %>
@@ -157,5 +240,13 @@
     $("#msg").on("keydown", trySendingMsg);
     scrollSmoothToBottom();
   </script>
+  <script type="text/javascript">
+    var modal = document.getElementById("myModal");
+    var closeButton = document.getElementById("close");
+    closeButton.onclick = function() {
+        modal.style.display = "none";
+      };
+  </script>
   <script src="/javascripts/speechRecognition.js"></script>
+
 </html>

@@ -30,6 +30,16 @@ var userSchema = mongoose.Schema({
     a: Number,
     n: Number
   },
+  rating: {
+    count: {
+      type: Number,
+      default: 0
+    },
+    value: {
+      type: Number,
+      default: 0
+    }
+  },
   loginType: String
 });
 

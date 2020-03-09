@@ -73,7 +73,7 @@
           </div>
         </div>
       <% } %>
-      <% if(room.chats.length > 50 && room.rating.indexOf(session.id) === -1) { %>
+      <% if(room.chats.length > 10 && room.rating.indexOf(session.id) === -1) { %>
                 <!-- Modal -->
                 <div id="myModal" class="modal">
 
@@ -82,7 +82,7 @@
                     <span id="close" class="close">&times;</span>
                     <h2>Rate your experience with this user</h2>
                     <p>Your rating will help improve our recommendations!</p>
-                    <form method="POST" action="/user_rating">
+                    <form method="POST" action="/chat/user_rating">
                       <div class="form-group">
                         <fieldset class="rating">
                           <input type="radio" id="star10" name="rating" value="10" /><label class = "full" for="star10" title="Excellent experience"></label>

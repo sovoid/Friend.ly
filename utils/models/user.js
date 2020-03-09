@@ -31,7 +31,10 @@ var userSchema = mongoose.Schema({
     n: Number
   },
   rating: {
-    count: Number,
+    count: {
+      type: Number,
+      default: 0
+    },
     value: {
       type: Number,
       default: 0

@@ -9,7 +9,6 @@ var _ = require("underscore");
 
 router.get("/", function(req, res, next) {
   User.find({}).exec((error, users) => {
-    
     res.render("chat/index", {
       title: req.app.conf.name,
       users: (users.length >= 50) ? _.sample(users, 50) : users,
@@ -34,18 +33,27 @@ router.post("/user_rating", function (req, res, next) {
         user.rating.value = Math.floor(((user.rating.value * user.rating.count) + req.body.rating) / (count + 1));
       }
       user.rating.count += 1;
-      Room.find({ id: req.body.chatRoomId }).exec((err, room) => {
+      Room.findOne({ id: req.body.chatRoomId }).exec((err, room) => {
+        console.log(room);
         room.rating.push(req.session.user.id);
-        room.save((err, savedRoom) => {
-          user.save((err, savedUser) => {
-            req.session.socket.room = savedRoom.id;
-            res.render("chat/room", {
-              title: req.app.conf.name,
-              room: savedRoom,
-              session: req.session.user,
-              reciever: savedUser
-            });
-          })
+        user.save((err, savedUser) => {
+          if (err) {
+            console.log(err);
+          } else {
+            room.save((err, savedRoom) => {
+              if (err) {
+                console.log(err)
+              } else {
+                console.log(savedUser);
+                res.render("chat/room", {
+                  title: req.app.conf.name,
+                  room: savedRoom,
+                  session: req.session.user,
+                  reciever: savedUser
+                });
+              }
+            })
+          }
         })
       })
     })
@@ -92,7 +100,8 @@ router.get("/:userid", function(req, res, next) {
         var newChatRoom = new Room({
           id: possibleRoomId,
           users: [user.id, req.session.user.id],
-          chats: []
+          chats: [],
+          rating: []
         });
         newChatRoom.save((err, done) => {
           res.render("chat/room", {

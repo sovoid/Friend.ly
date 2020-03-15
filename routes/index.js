@@ -23,11 +23,6 @@ router.get("/", function(req, res, next) {
           suggestedUsers = underscore.union(suggestedUsers, value);
         })
 
-
-      // })
-
-
-
         getUserTone(req_user, function (err, mood) {
           res.render("index", {
             user: req_user,

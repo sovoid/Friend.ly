@@ -111,13 +111,13 @@ router.get("/:userid", function (req, res, next) {
       newChatRoom.save((err, newChatRoom) => {
         console.log(newChatRoom.id);
         user.chats[req.session.user.id] = newChatRoom.id;
-        user.markModified('chats');
+        user.markModified("chats");
         user.save((err, user) => {
           User.findOne({
             id: req.session.user.id
           }).exec((err, req_user) => {
             req_user.chats[user.id] = newChatRoom.id;
-            req_user.markModified('chats');
+            req_user.markModified("chats");
             req_user.save((err, done) => {
               res.render("chat/room", {
                 title: req.app.conf.name,

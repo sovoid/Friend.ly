@@ -11,23 +11,19 @@ router.get("/", function(req, res, next) {
   if (req.session.user) {
     user.getAll((err, users) => {
       user.findOne({ id: req.session.user.id }, (error, req_user) => {
-        users = underscore.reject(users, (user) => user.id === req.session.user.id);
-        var suggestedUsers = [];
-        var friendlyFollowers = [];
-        underscore.each(users, function (user) {
-          let similarityIndex = pearsonCorrelation([Object.values(req_user.bigFive), Object.values(user.bigFive)], 0, 1);
-          if (similarityIndex >= 0.6 && !underscore.find(user.friendlyFollowers, (eachFollower) => eachFollower.id === req_user.id)) {
-            user["similarityIndex"] = similarityIndex;
-            suggestedUsers.push(user);
-          }
+        users = underscore.reject(users, (user) => user.id === req.session.user.id || underscore.has(req.session.user.chats, user.id) || pearsonCorrelation([Object.values(req_user.bigFive), Object.values(user.bigFive)], 0, 1) < 0.5 || underscore.find(user.friendlyFollowers, (eachFollower) => eachFollower.id === req_user.id));
+        
+        let suggestedUsers = [];
+        let suggestedUsersGroup = underscore.groupBy(suggestedUsers, function iteratee(user) {
+          return Math.floor(user.similarityIndex*10);
         });
-        suggestedUsers = underscore.sortBy(suggestedUsers, function iteratee(user) {
-          return -(user.similarityIndex);
-        });
-        console.log("Users before rating",suggestedUsers)
 
-        suggestedUsers = suggestedUsers.sort((a, b) => (a.rating.value < b.rating.value) ? 1 : -1)
-        console.log("Users after rating",suggestedUsers)
+        underscore.each(suggestedUsersGroup, (value, key) => {
+          suggestedUsersGroup[key] = underscore.sortBy(value, (eachuser) => eachUser.rating.value);
+          suggestedUsers = underscore.union(suggestedUsers, value);
+        })
+
+
       // })
 
 

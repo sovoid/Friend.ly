@@ -60,6 +60,7 @@ passport.use(
               following: profile._json["friends_count"],
               notifications: [],
               email: profile.email,
+              chats: {},
               bigFive: {
                 o: resp.openess,
                 c: resp.conscientiousness,

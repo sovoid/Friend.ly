@@ -23,6 +23,7 @@ var userSchema = mongoose.Schema({
   notifications: Array,
   firstname: String,
   lastname: String,
+  chats:  { type : mongoose.Schema.Types.Mixed, default : { } }, 
   bigFive: {
     o: Number,
     c: Number,

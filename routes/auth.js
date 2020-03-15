@@ -139,6 +139,7 @@ router.post("/quiz", formParser, function (req, res, next) {
     newUser.password = newUser.generateHash(newUser.password);
   }
 
+  newUser.chats = {};
   newUser.save(function (err, result) {
     req.session.user = result;
     console.log(req.session.user);

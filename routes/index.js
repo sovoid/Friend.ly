@@ -22,14 +22,21 @@ router.get("/", function(req, res, next) {
           }
         });
         suggestedUsers = underscore.sortBy(suggestedUsers, function iteratee(user) {
-          return user.similarityIndex;
+          return -(user.similarityIndex);
         });
+        console.log("Users before rating",suggestedUsers)
+
+        suggestedUsers = suggestedUsers.sort((a, b) => (a.rating.value < b.rating.value) ? 1 : -1)
+        console.log("Users after rating",suggestedUsers)
+      // })
+
+
 
         getUserTone(req_user, function (err, mood) {
           res.render("index", {
             user: req_user,
             title: req.app.conf.name,
-            people: suggestedUsers.reverse(),
+            people: suggestedUsers,
             events: mood
           });
          });

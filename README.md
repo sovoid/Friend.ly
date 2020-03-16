@@ -14,7 +14,11 @@
   <h3 align="center">Friend.<span style="color: pink">ly</span></h3>
 
   <p align="center">
-    A friend-recommendation system that utilizes sentiment analysis and personality trait extraction for recommendations!
+    The internet is flooded with Social Networking Sites(SNS). Be it Twitter, Facebook or Instagram, SNS(s) are without a doubt one of the most popular methods of making friends in the virtual realm. One of the 
+    most important aspects of any SNS is the use of a Friend Recommendation System(FRS). Several different types of FRSs have been proposed but a feature that remains common to all of those is homophily, the propensity to associate people with similar others.<br><br>
+    While homophily-based FRSs have proven to be extremely accurate in most circumstances, an essential area that still remains relatively unexplored in this domain is the use of personality insights for recommending friends.
+    <br><br>
+    With Friend.ly, we propose a novel FRS which leverages text-mining, personality trait extraction, sentiment analysis and hybrid filtering and show it to be having a better performance than most collaborative filtering based FRSs.
     <br />
     <a href="https://github.com/AlQaholic007/Friend.ly/issues">Report Bug</a>
     ·

@@ -7,12 +7,11 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/rating.css">
     <link type="text/css" rel="stylesheet" media="screen" href="/animations/jquery-sakura.min.css" />
     <script src="/javascripts/emojiPicker.js"></script>
- 
   <body>
     	<div class="container-fluid navbar-fixed-top box-shadow" style="background-color:#fff; margin-bottom:2rem">
         <br>
           <b>
-            <a class="back-btn" onclick="history.back()"><i class="fa fa-lg fa-arrow-left"></i></a>
+            <a class="back-btn" onclick="takeMeBack()"><i class="fa fa-lg fa-arrow-left"></i></a>
             <img src="<%= reciever.profile_picture %>" class="logo">
             <%= reciever.username %>
           </b>
@@ -60,7 +59,7 @@
                       <div>
                         <br>
                         <br>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" onclick="(() => flag++)()" class="btn btn-primary">Submit</button>
                       </div>
                       
                   </form>
@@ -104,6 +103,7 @@
   </body>
   <script src="/javascripts/socket.io.js" charset="utf-8"></script>
   <script type="text/javascript">
+  let flag = 0;
   emojiPicker.initiate();
   scrollingElement = (document.scrollingElement || document.body);
   function scrollSmoothToBottom (id) {
@@ -197,12 +197,23 @@
     $("#msg").on("keydown", trySendingMsg);
     scrollSmoothToBottom();
   </script>
+  
   <script type="text/javascript">
     var modal = document.getElementById("myModal");
     var closeButton = document.getElementById("close");
     closeButton.onclick = function() {
         modal.style.display = "none";
       };
+
+    
+    function takeMeBack() {
+      if(flag) {
+        history.back();
+        history.back();
+      } else {
+        history.back();
+      }
+    }
   </script>
   <script src="/javascripts/speechRecognition.js"></script>
 

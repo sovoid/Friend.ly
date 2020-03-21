@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const chai = require("chai");
 const expect = chai.expect;
+require('dotenv').config()
+
 
 // Create a new schema that accepts a 'name' object.
 // 'name' is a required field
@@ -15,10 +17,12 @@ const Name = mongoose.model("Name", testSchema);
 describe("Database Tests", function() {
   //Before starting the test, create a sandboxed database connection
   //Once a connection is established invoke done()
-
+  
   before(function(done) {
-    mongoose.connect("mongodb://localhost/friendly-test", {
-      useUnifiedTopology: true
+    var dbHost = process.env.dbHost || "localhost";
+    mongoose.connect(process.env.DB_TEST_URI || "mongodb://"+ dbHost+"Friendly-test", {
+      useUnifiedTopology: true,
+      useNewUrlParser: true
     });
     const db = mongoose.connection;
     db.on("error", console.error.bind(console, "connection error"));

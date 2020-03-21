@@ -1,4 +1,5 @@
-// var dbHost = process.env.dbHost || "localhost";
+var dbHost = process.env.dbHost || "localhost";
+require('dotenv').config()
 module.exports = {
   name: "friendly",
   title: "friendly",
@@ -14,7 +15,7 @@ module.exports = {
   author: "Soham Parekh <mail@sohamp.dev>",
   version: "1.0.0",
   db: {
-    connectionUri: process.env.DB_CONNECTION_URI,
+    connectionUri:process.env.DB_CONNECTION_URI || "mongodb://" + dbHost + ":27017/friendly",
     params: {},
     collections: ["moment", "user", "feeling", "ask"]
   }

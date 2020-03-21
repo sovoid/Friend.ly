@@ -20,9 +20,9 @@
     <br><br>
     With Friend.ly, we propose a novel FRS which leverages text-mining, personality trait extraction, sentiment analysis and hybrid filtering and show it to be having a better performance than most collaborative filtering based FRSs.
     <br />
-    <a href="https://github.com/AlQaholic007/Friend.ly/issues">Report Bug</a>
+    <a href="https://github.com/AlQaholic007/tracker/issues">Report Bug or Feature Request</a>
     ·
-    <a href="https://github.com/AlQaholic007/Friend.ly/issues">Feature Request</a>
+    <a href="https://github.com/AlQaholic007/tracker/issues">Raise a PR</a>
   </p>
 </p>
 
@@ -152,6 +152,6 @@ Project Link: [https://github.com/AlQaholic007/Friend.ly](https://github.com/AlQ
 [forks-url]: https://github.com/AlQaholic007/Friend.ly/network/members
 [stars-shield]: https://img.shields.io/github/stars/AlQaholic007/Friend.ly?style=flat-square
 [stars-url]: https://github.com/AlQaholic007/Friend.ly/stargazers
-[issues-shield]: https://img.shields.io/github/issues/AlQaholic007/Friend.ly?style=flat-square
-[issues-url]: https://github.com/AlQaholic007/Friend.ly/issues
+[issues-shield]: https://img.shields.io/github/issues/AlQaholic007/tracker/repo/Friend.ly
+[issues-url]: https://github.com/AlQaholic007/tracker/issues
 [product-screenshot]: docs/img/screenshot.png

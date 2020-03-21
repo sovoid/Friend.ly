@@ -1,5 +1,7 @@
+
 var dbHost = process.env.dbHost || "localhost";
-require('dotenv').config()
+require('dotenv').config();
+
 module.exports = {
   name: "friendly",
   title: "friendly",

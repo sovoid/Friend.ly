@@ -1,4 +1,4 @@
-var dbHost = process.env.dbHost || "localhost";
+// var dbHost = process.env.dbHost || "localhost";
 module.exports = {
   name: "friendly",
   title: "friendly",
@@ -14,7 +14,7 @@ module.exports = {
   author: "Soham Parekh <mail@sohamp.dev>",
   version: "1.0.0",
   db: {
-    connectionUri: "mongodb://" + dbHost + ":27017/friendly",
+    connectionUri: process.env.DB_CONNECTION_URI,
     params: {},
     collections: ["moment", "user", "feeling", "ask"]
   }

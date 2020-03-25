@@ -2,11 +2,13 @@
   "name": "friend.ly",
   "version": "1.0.0",
   "scripts": {
+    "openshift": "nodeshift --expose --dockerImage=registry.access.redhat.com/rhoar-nodejs/nodejs-8",
     "start": "node ./bin/www",
     "test": "mocha && node ./bin/www",
     "test-run": "node ./bin/www --test",
     "dev": "nodemon ./bin/www"
   },
+  
   "dependencies": {
     "apikeygen": "^1.1.0",
     "array-tools": "2.0.9",
@@ -56,7 +58,9 @@
     "underscore": "^1.9.2",
     "validator": "^12.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodeshift": "^6.0.1"
+  },
   "description": "A social media platform written in Node.js",
   "main": "./bin/www",
   "keywords": [

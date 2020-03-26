@@ -141,6 +141,7 @@ router.get("/:userid", function (req, res, next) {
               if (err) {
                 console.log("Error saving req user: ", err);
               }
+              req.session.user = savedReqUser;
               res.render("chat/room", {
                 title: req.app.conf.name,
                 room: savedChatRoom,

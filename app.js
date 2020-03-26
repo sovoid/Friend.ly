@@ -133,13 +133,14 @@ app.use(function(req, res, next) {
     User.findOne({ id: req.session.user.id }).exec((err, user) => {
       if (!err && user) {
         req.session.user = user;
-        return next();
+        next();
       } else {
-        return next(new Error('Could not restore User from Session.'));
+        next(new Error('Could not restore User from Session.'));
       }
     })
+  } else {
+    res.redirect("/");
   }
-  res.redirect("/");
 });
 app.use("/u", usersRouter);
 app.use("/me", meRouter);

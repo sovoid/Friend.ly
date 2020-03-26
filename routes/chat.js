@@ -99,6 +99,9 @@ router.get("/:userid", function (req, res, next) {
       Room.findOne({
         id: chatRoomId
       }).exec((err, chatRoom) => {
+        if (err) {
+          console.log("Error fetching chat room: ", err);
+        }
         req.session.socket.room = chatRoomId;
         res.render("chat/room", {
           title: req.app.conf.name,
@@ -116,17 +119,26 @@ router.get("/:userid", function (req, res, next) {
       });
       
       newChatRoom.save((err, savedChatRoom) => {
+        if (err) {
+          console.log("Error creating new chat room: ", err);
+        }
         console.log("New chat room created");
         req.session.socket.room = savedChatRoom.id;
         chatUser.chats[req.session.user.id] = savedChatRoom.id;
         chatUser.markModified("chats");
         chatUser.save((err, savedChatUser) => {
+          if (err) {
+            console.log("Error saving new chat user: ", err);
+          }
           User.findOne({
             id: req.session.user.id
           }).exec((err, reqUser) => {
             reqUser.chats[savedChatUser.id] = savedChatRoom.id;
             reqUser.markModified("chats");
             reqUser.save((err, savedReqUser) => {
+              if (err) {
+                console.log("Error saving req user: ", err);
+              }
               res.render("chat/room", {
                 title: req.app.conf.name,
                 room: savedChatRoom,

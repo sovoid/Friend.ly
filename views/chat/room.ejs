@@ -68,27 +68,17 @@
                 </div>
         <!-- /Modal -->
       <% } %>
-  <% for(var i=0;i<room.chats.length;i++) {
-    if(room.chats[i].by && room.chats[i].by.profile_picture) { %>
-      <!--<div class="col-md-4">
-        <li class="list-group-item" style="display:inline-block">
-          <img class="logo" style=" border-radius: 50%;" src="<%= room.chats[i].by.profile_pic %>">
-        </li>
-      </div>
-      <div class="col-md-6">
-        <li class="list-group-item" style="height:100%; width:100%">
-            <a style="text-decoration: underline" href="/u/<%= room.chats[i].by._id %>"><b><%= room.chats[i].by.username %></b></a> - <span data-time="<%= room.chats[i].time %>" class="timeSince"><%= timeSince(new Date(room.chats[i].time)) %></span><br> <%= room.chats[i].txt %>
-        </li>
-      </div>-->
-
+  <% for(let message of room.chats) { %>
+    <% if(message.by && message.by.profile_picture) { %>
     <ul class="list-group">
       <li class="list-group-item">
-        <img class="logo" style="height: 30px;width: 30px;" src="<%= room.chats[i].by.profile_picture %>">
-        <a href="/u/@<%= room.chats[i].by.username %>"><b><%= room.chats[i].by.username %></b></a><span data-time="<%= room.chats[i].time %>" class="timeSince float-right"><%= timeSince(new Date(room.chats[i].time)) %></span>
-        <br><br> <span class="msg"><%= room.chats[i].txt %></span>
+        <img class="logo" style="height: 30px;width: 30px;" src="<%= message.by.profile_picture %>">
+        <a href="/u/@<%= message.by.username %>"><b><%= message.by.username %></b></a><span data-time="<%= message.time %>" class="timeSince float-right"><%= timeSince(new Date(message.time)) %></span>
+        <br><br> <span class="msg"><%= message.txt %></span>
       </li>
     </ul>
-  <% }} %>
+  <% } %>
+  <% } %>
 </ul>
     <div style="display:none" id="typing" class="row">
       <div class="col-md-12">
@@ -173,7 +163,7 @@
     socket.on('connect', function (data) {
       console.log('Connected! Enjoy Friend.ly Direct Messages.')
     });
-    socket.on('new msg', function (data) {
+    socket.on('msg', function (data) {
       addMessage(data);
     });
     socket.on('typing', function (data) {

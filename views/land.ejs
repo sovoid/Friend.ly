@@ -4,6 +4,14 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/landing.css" />
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css" />
+  <script type="text/javascript">
+      $(document).ready(function(){
+        if (localStorage.nightMode !== "on") {
+          $("#vibe").css("color", "black");
+        } 
+      });
+   </script>
+ 
   <body>
     <%- include('navbar') -%>
     <div class="landing-main">
@@ -12,7 +20,8 @@
 			<section id="banner">
 				<div class="inner">
 					<h2 class="major special">
-						<span>
+            
+						<span id="vibe">
 							Your vibe attracts your tribe
 						</span>
 					</h2>
@@ -21,8 +30,8 @@
 						<li><a href="account/twitter" style="background-color: #00acee" class="button primary large">
 								<span class="icon solid brands fa-twitter"></span>
 								</a>
-								<a href="account/facebook" style="background-color: #3b5998" class="button primary large">
-									<span class="icon solid brands fa-facebook-f"></span>
+								<!-- <a href="account/facebook" style="background-color: #3b5998" class="button primary large">
+									<span class="icon solid brands fa-facebook-f"></span> -->
                 </a>
                 <a href="account/google" style="background-color: #1aa260" class="button primary large">
 									<span class="icon solid brands fa-google"></span>

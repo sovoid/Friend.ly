@@ -14,7 +14,7 @@ router.get("/", function(req, res, next) {
         
         // reject user if he is current user or is followed by current user or is not similar or has spoken to current user
         users = underscore.reject(users, (eachUser) => {
-          return (eachUser.id === req_user.id || req_user.chats[eachUser.id] || underscore.contains(eachUser.friendlyFollowers, (eachFollower) => eachFollower.id === req_user.id) || pearsonCorrelation([underscore.values(req_user.bigFive), underscore.values(eachUser.bigFive)], 0, 1) < 0.5);
+          return (eachUser.id === req_user.id || req_user.chats[eachUser.id] || pearsonCorrelation([underscore.values(req_user.bigFive), underscore.values(eachUser.bigFive)], 0, 1) < 0.5);
         });
         
         let suggestedUsers = [];

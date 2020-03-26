@@ -3,15 +3,19 @@ var Room = require("../models/room");
 const sio = require("../../bin/www").sio;
 const sessionMiddleware = require("../../app").sessionMiddleware;
 
-sio.use(function(socket, next) {
+sio.use(function (socket, next) {
   sessionMiddleware(socket.request, socket.request.res, next);
 });
 
 function type(socket) {
-  User.findOne({ id: socket.session.user.id }).exec(function(err, u) {
+  User.findOne({
+    id: socket.session.user.id
+  }).exec(function (err, u) {
     socket
       .to(socket.session.socket.room)
-      .emit("typing", { username: u.username });
+      .emit("typing", {
+        username: u.username
+      });
   });
 }
 
@@ -21,13 +25,24 @@ function sendMsg(socket, chat) {
   if (!room.chats) {
     room.chats = [];
   }
-  User.findOne({ id: socket.session.user.id }).exec(function(err, u) {
+  User.findOne({
+    id: socket.session.user.id
+  }).exec(function (err, u) {
     const user = {
       username: u.username,
       profile_picture: u.profile_picture,
       id: u.id
     };
-    room.chats.push({ txt: chat.txt, by: user, time });
+    room.chats.push({
+      txt: chat.txt,
+      by: user,
+      time
+    });
+    console.log({
+      txt: chat.txt,
+      by: user,
+      time
+    });
 
     room.save((err, obj) => {
       sio.to(socket.session.socket.room).emit("new msg", {
@@ -36,8 +51,10 @@ function sendMsg(socket, chat) {
         time
       });
       //userData.notifications
-      let otherUser = room.users.find((x) => x !== u.id);
-      User.findOne({ id: otherUser }).exec(function(err, otherU) {
+      let otherUser = room.users.find(x => x != u.id);
+      User.findOne({
+        id: otherUser
+      }).exec(function (err, otherU) {
         otherU.notifications.push({
           id: Math.random(),
           msg: `@${u.username} sent you a message: ${chat.txt}`,
@@ -50,20 +67,22 @@ function sendMsg(socket, chat) {
   });
 }
 
-sio.on("connection", function(socket) {
+sio.on("connection", function (socket) {
   const session = socket.request.session;
   socket.session = session;
   socket.join(session.socket.room);
-  Room.findOne({ id: session.socket.room }, function(err, room) {
+  Room.findOne({
+    id: session.socket.room
+  }, function (err, room) {
     if (!room) {
       return socket.disconnect("unauthorized");
     }
     socket.room = room;
   });
-  socket.on("msg", function(data) {
+  socket.on("msg", function (data) {
     sendMsg(socket, data);
   });
-  socket.on("typing", function(data) {
+  socket.on("typing", function (data) {
     type(socket);
   });
 });

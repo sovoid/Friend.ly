@@ -12,7 +12,7 @@ module.exports = {
   },
   http: {
     host: "localhost",
-    port: 80
+    port: 8080
   },
   author: "Soham Parekh <mail@sohamp.dev>",
   version: "1.0.0",

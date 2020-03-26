@@ -93,6 +93,8 @@ router.get("/:userid", function (req, res, next) {
       return res.status(404).send("No user found!");
     }
     req.session.socket = {};
+
+    console.log("CHATS: ", req.session.user.chats[chatUser.id]);
     
     if (req.session.user.chats[chatUser.id]) {
       let chatRoomId = req.session.user.chats[chatUser.id];

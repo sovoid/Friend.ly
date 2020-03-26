@@ -137,7 +137,7 @@ router.get("/:userid", function (req, res, next) {
           }).exec((err, req_user) => {
             if (!req_user.chats || req_user.chats.length === 0) {
               req_user.chats = [];
-              req_user.push({
+              req_user.chats.push({
                 [user.id]: newChatRoom.id
               });
             } else {

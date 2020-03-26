@@ -23,7 +23,7 @@ router.get("/", function(req, res, next) {
         });
 
         underscore.each(suggestedUsersGroup, (value, key) => {
-          suggestedUsersGroup[key] = underscore.sortBy(value, (eachuser) => eachUser.rating.value);
+          suggestedUsersGroup[key] = underscore.sortBy(value, (eachUser) => eachUser.rating.value);
           suggestedUsers = underscore.union(suggestedUsers, value);
         })
 

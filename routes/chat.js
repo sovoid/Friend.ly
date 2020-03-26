@@ -12,12 +12,12 @@ router.get("/", function (req, res, next) {
   User.find({}).exec((error, users) => {
     let chattedWith = [];
 
-    if (req.session.user.chats) {
+    if (req.session.user.chats.length) {
       users = _.reject(users, (eachUser) => {
-        if (req.session.user.chats && req.session.user.chats[eachUser.id]) {
+        if (req.session.user.chats[0][eachUser.id]) {
           chattedWith.push(eachUser);
         }
-        return req.session.user.chats[eachUser.id];
+        return req.session.user.chats[0][eachUser.id];
       })
     }
     
@@ -96,11 +96,12 @@ router.get("/:userid", function (req, res, next) {
     }
     req.session.socket = {};
 
-    if (!req.session.user.chats) {
-      req.session.user.chats = {};
+    if (!req.session.user.chats || !req.session.user.chats.length) {
+      req.session.user.chats = [];
     }
-    let chatRoomId = req.session.user.chats[user.id];
-    if (chatRoomId) {
+    
+    if (req.session.user.chats[0] && req.session.user.chats[0][user.id]) {
+      let chatRoomId = req.session.user.chats[0][user.id];
       Room.findOne({
         id: chatRoomId
       }).exec((err, chatRoom) => {
@@ -121,15 +122,27 @@ router.get("/:userid", function (req, res, next) {
       });
 
       newChatRoom.save((err, newChatRoom) => {
-        console.log(newChatRoom.id);
-        user.chats[req.session.user.id] = newChatRoom.id;
-        user.markModified("chats");
+        console.log("New chat room created");
+        if (!user.chats || user.chats.length === 0) {
+          user.chats = [];
+          user.chats.push({
+            [req.session.user.id]: newChatRoom.id
+          });
+        } else {
+          user.chats[0][req.session.user.id] = newChatRoom.id;
+        }
         user.save((err, user) => {
           User.findOne({
             id: req.session.user.id
           }).exec((err, req_user) => {
-            req_user.chats[user.id] = newChatRoom.id;
-            req_user.markModified("chats");
+            if (!req_user.chats || req_user.chats.length === 0) {
+              req_user.chats = [];
+              req_user.push({
+                [user.id]: newChatRoom.id
+              });
+            } else {
+              req_user.chats[0][user.id] = newChatRoom.id
+            }
             req_user.save((err, done) => {
               res.render("chat/room", {
                 title: req.app.conf.name,

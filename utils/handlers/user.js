@@ -42,7 +42,8 @@ function createNew(obj, cb) {
           notifications: [],
           created_at: Date.now(),
           loginType: "friendly",
-          password: obj.password
+          password: obj.password,
+          chats: []
         };
         return cb(null, newUser);
       }

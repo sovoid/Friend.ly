@@ -15,7 +15,7 @@ router.get("/", function (req, res, next) {
       if (req.session.user.chats[eachUser.id]) {
         chattedWith.push(eachUser);
       }
-      return !req.session.user.chats[eachUser.id];
+      return req.session.user.chats[eachUser.id];
     })
     res.render("chat/index", {
       title: req.app.conf.name,

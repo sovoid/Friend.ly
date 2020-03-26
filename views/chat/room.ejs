@@ -111,7 +111,7 @@
         $(t).text(since);
       })
     },30000)
-    var socket = io(`ws://${location.hostname}`, {transports: ['websocket']});
+    var socket = io();
 
 
     function addMessage(data) {

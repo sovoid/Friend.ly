@@ -120,7 +120,7 @@
         $(t).text(since);
       })
     },30000)
-    var socket = io('ws://localhost:80', {transports: ['websocket']});
+    var socket = io({transports: ['websocket']});
 
 
     function addMessage(data) {

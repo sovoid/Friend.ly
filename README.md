@@ -2,8 +2,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]<br>
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/addcb42c255b4a819c6d2b16b18d92a6)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlQaholic007/Friend.ly&amp;utm_campaign=Badge_Grade) [![CircleCI](https://circleci.com/gh/AlQaholic007/Friend.ly.svg?style=svg)](https://circleci.com/gh/AlQaholic007/Friend.ly) [![Build Status](https://travis-ci.com/AlQaholic007/Friend.ly.svg?token=qJs8ej6Y7g54csoc3mXz&branch=master)](https://travis-ci.org/AlQaholic007/Friend.ly) [![HitCount](http://hits.dwyl.com/AlQaholic007/Friend.ly.svg)](http://hits.dwyl.com/AlQaholic007/Friend.ly)
-
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/addcb42c255b4a819c6d2b16b18d92a6)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlQaholic007/Friend.ly&amp;utm_campaign=Badge_Grade) [![CircleCI](https://circleci.com/gh/AlQaholic007/Friend.ly.svg?style=svg)](https://circleci.com/gh/AlQaholic007/Friend.ly) [![Build Status](https://travis-ci.com/AlQaholic007/Friend.ly.svg?token=qJs8ej6Y7g54csoc3mXz&branch=master)](https://travis-ci.org/AlQaholic007/Friend.ly)
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">

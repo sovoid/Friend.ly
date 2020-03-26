@@ -11,12 +11,16 @@ var guid = require("guid");
 router.get("/", function (req, res, next) {
   User.find({}).exec((error, users) => {
     let chattedWith = [];
-    users = _.reject(users, (eachUser) => {
-      if (req.session.user.chats[eachUser.id]) {
-        chattedWith.push(eachUser);
-      }
-      return req.session.user.chats[eachUser.id];
-    })
+
+    if (req.session.user.chats) {
+      users = _.reject(users, (eachUser) => {
+        if (req.session.user.chats && req.session.user.chats[eachUser.id]) {
+          chattedWith.push(eachUser);
+        }
+        return req.session.user.chats[eachUser.id];
+      })
+    }
+    
     res.render("chat/index", {
       title: req.app.conf.name,
       users: (users.length >= 50) ? _.sample(users, 50) : users,

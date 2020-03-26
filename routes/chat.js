@@ -144,7 +144,7 @@ router.get("/:userid", function (req, res, next) {
               res.render("chat/room", {
                 title: req.app.conf.name,
                 room: savedChatRoom,
-                session: savedReqUser,
+                session: req.session.user,
                 reciever: savedChatUser
               });
             })

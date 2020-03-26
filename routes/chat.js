@@ -14,10 +14,10 @@ router.get("/", function (req, res, next) {
 
     if (req.session.user.chats.length) {
       users = _.reject(users, (eachUser) => {
-        if (req.session.user.chats[0][eachUser.id]) {
+        if (req.session.user.chats[eachUser.id]) {
           chattedWith.push(eachUser);
         }
-        return req.session.user.chats[0][eachUser.id];
+        return req.session.user.chats[eachUser.id];
       })
     }
     
@@ -90,18 +90,14 @@ router.get("/:userid", function (req, res, next) {
   require("../utils/handlers/socket");
   User.findOne({
     id: req.params.userid
-  }).exec((error, user) => {
-    if (!user) {
+  }).exec((error, chatUser) => {
+    if (!chatUser) {
       return res.status(404).send("No user found!");
     }
     req.session.socket = {};
-
-    if (!req.session.user.chats || !req.session.user.chats.length) {
-      req.session.user.chats = [];
-    }
     
-    if (req.session.user.chats[0] && req.session.user.chats[0][user.id]) {
-      let chatRoomId = req.session.user.chats[0][user.id];
+    if (req.session.user.chats[chatUser.id]) {
+      let chatRoomId = req.session.user.chats[chatUser.id];
       Room.findOne({
         id: chatRoomId
       }).exec((err, chatRoom) => {
@@ -110,45 +106,34 @@ router.get("/:userid", function (req, res, next) {
           title: req.app.conf.name,
           room: chatRoom,
           session: req.session.user,
-          reciever: user
+          reciever: chatUser
         })
       })
     } else {
       var newChatRoom = new Room({
         id: guid.raw(),
-        users: [user.id, req.session.user.id],
+        users: [chatUser.id, req.session.user.id],
         chats: [],
         rating: []
       });
-
-      newChatRoom.save((err, newChatRoom) => {
+      
+      newChatRoom.save((err, savedChatRoom) => {
         console.log("New chat room created");
-        if (!user.chats || user.chats.length === 0) {
-          user.chats = [];
-          user.chats.push({
-            [req.session.user.id]: newChatRoom.id
-          });
-        } else {
-          user.chats[0][req.session.user.id] = newChatRoom.id;
-        }
-        user.save((err, user) => {
+        req.session.socket.room = savedChatRoom.id;
+        chatUser.chats[req.session.user.id] = savedChatRoom.id;
+        chatUser.markModified("chats");
+        chatUser.save((err, savedChatUser) => {
           User.findOne({
             id: req.session.user.id
-          }).exec((err, req_user) => {
-            if (!req_user.chats || req_user.chats.length === 0) {
-              req_user.chats = [];
-              req_user.chats.push({
-                [user.id]: newChatRoom.id
-              });
-            } else {
-              req_user.chats[0][user.id] = newChatRoom.id
-            }
-            req_user.save((err, done) => {
+          }).exec((err, reqUser) => {
+            reqUser.chats[savedChatUser.id] = savedChatRoom.id;
+            reqUser.markModified("chats");
+            reqUser.save((err, savedReqUser) => {
               res.render("chat/room", {
                 title: req.app.conf.name,
-                room: newChatRoom,
-                session: req.session.user,
-                reciever: user
+                room: savedChatRoom,
+                session: savedReqUser,
+                reciever: savedChatUser
               });
             })
           })

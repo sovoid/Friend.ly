@@ -60,7 +60,7 @@ passport.use(
               following: profile._json["friends_count"],
               notifications: [],
               email: profile.email,
-              chats: [],
+              chats: {},
               bigFive: {
                 o: resp.openess,
                 c: resp.conscientiousness,
@@ -125,7 +125,7 @@ passport.use(
             loginType: "google",
             firstname: profile.name.givenName,
             lastname: profile.name.familyName,
-            chats: []
+            chats: {}
           };
           // newUser.save(function (err, done) {
           //   if (err) return cb(err);

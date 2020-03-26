@@ -43,7 +43,7 @@ function createNew(obj, cb) {
           created_at: Date.now(),
           loginType: "friendly",
           password: obj.password,
-          chats: []
+          chats: {}
         };
         return cb(null, newUser);
       }

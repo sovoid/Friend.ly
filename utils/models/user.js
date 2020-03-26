@@ -24,8 +24,8 @@ var userSchema = mongoose.Schema({
   firstname: String,
   lastname: String,
   chats: {
-    type: Array,
-    default: []
+    type: mongoose.Schema.Types.Mixed,
+    default: {}
   }, 
   bigFive: {
     o: Number,
@@ -45,6 +45,9 @@ var userSchema = mongoose.Schema({
     }
   },
   loginType: String
+},
+  {
+    minimize: false
 });
 
 // methods ======================

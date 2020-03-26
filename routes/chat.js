@@ -12,14 +12,12 @@ router.get("/", function (req, res, next) {
   User.find({}).exec((error, users) => {
     let chattedWith = [];
 
-    if (req.session.user.chats.length) {
       users = _.reject(users, (eachUser) => {
         if (req.session.user.chats[eachUser.id]) {
           chattedWith.push(eachUser);
         }
         return req.session.user.chats[eachUser.id];
       })
-    }
     
     res.render("chat/index", {
       title: req.app.conf.name,

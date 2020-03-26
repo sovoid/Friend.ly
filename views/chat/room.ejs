@@ -163,7 +163,7 @@
     socket.on('connect', function (data) {
       console.log('Connected! Enjoy Friend.ly Direct Messages.')
     });
-    socket.on('msg', function (data) {
+    socket.on('new msg', function (data) {
       addMessage(data);
     });
     socket.on('typing', function (data) {

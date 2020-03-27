@@ -43,7 +43,7 @@ router.get("/settings", function(req, res, next) {
 });
 
 router.get("/activity", function(req, res, next) {
-  db.findOne({ _id: req.session.user._id }).exec((err, user) => {
+  db.findOne({ id: req.session.user.id }).exec((err, user) => {
     res.render("me/activity", {
       title: req.app.conf.name,
       activity: user.notifications
@@ -60,7 +60,7 @@ router.get("/post/:action/:query", function(req, res, next) {
       {
         db.findOne({ id: req.session.user.id }).exec((err, u) => {
           let id = req.params.query;
-          let postToDelete = _find(u.posts, (eachPost) => eachPost._id === id);
+          let postToDelete = _.find(u.posts, (eachPost) => eachPost._id === id);
           if (!postToDelete) {
             return res.redirect("/");
           }

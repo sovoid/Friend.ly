@@ -4,7 +4,6 @@
 <html>
   <%- include('../head') -%>
     <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/rating.css">
     <link type="text/css" rel="stylesheet" media="screen" href="/animations/jquery-sakura.min.css" />
     <script src="/javascripts/emojiPicker.js"></script>
     <script src="/javascripts/socket.io.js"></script>
@@ -29,45 +28,6 @@
             Send a message below!
           </div>
         </div>
-      <% } %>
-      <% if(room.chats.length > 10 && room.rating.indexOf(session.id) === -1) { %>
-                <!-- Modal -->
-                <div id="myModal" class="modal">
-
-                  <!-- Modal content -->
-                  <div class="modal-content">
-                    <span id="close" class="close" onclick="hideModal()">&times;</span>
-                    <h2>Rate your experience with this user</h2>
-                    <p>Your rating will help improve our recommendations!</p>
-                    <form method="POST" action="/chat/user_rating">
-                      <div class="form-group">
-                        <fieldset class="rating">
-                          <input type="radio" id="star10" name="rating" value="10" /><label class = "full" for="star10" title="Excellent experience"></label>
-                          <input type="radio" id="star9" name="rating" value="9" /><label class = "full" for="star9" title="Amazing experience"></label>
-                          <input type="radio" id="star8" name="rating" value="8" /><label class = "full" for="star8" title="Great experience"></label>
-                          <input type="radio" id="star7" name="rating" value="7" /><label class = "full" for="star7" title="Very Good experience"></label>
-                          <input type="radio" id="star6" name="rating" value="6" /><label class = "full" for="star6" title="Good experience"></label>
-                          <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Okay experience"></label>
-                          <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Poor experience"></label>
-                          <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Bad experience"></label>
-                          <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Very bad experience"></label>
-                          <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Not upto expecations"></label>
-                        <br>
-                        </fieldset>
-                        <input type="hidden" name="user" value="<%= reciever.id %>">
-                        <input type="hidden" name="chatRoomId" value="<%= room.id %>">
-                      </div>
-                      <div>
-                        <br>
-                        <br>
-                        <button type="submit" onclick="(() => flag++)()" class="btn btn-primary">Submit</button>
-                      </div>
-                      
-                  </form>
-                  </div>
-                
-                </div>
-        <!-- /Modal -->
       <% } %>
   <% for(let message of room.chats) { %>
     <% if(message.by && message.by.profile_picture) { %>
@@ -94,7 +54,6 @@
   </body>
   <!-- <script src="/javascripts/socket.io.js" charset="utf-8"></script> -->
   <script type="text/javascript">
-  let flag = 0;
   emojiPicker.initiate();
   scrollingElement = (document.scrollingElement || document.body);
   function scrollSmoothToBottom (id) {
@@ -191,19 +150,9 @@
   
   <script type="text/javascript">
 
-    function hideModal() {
-      var modal = document.getElementById("myModal");
-      modal.style.display = "none";
-    }
-
-    
     function takeMeBack() {
-      if(flag) {
-        history.back();
-        history.back();
-      } else {
-        history.back();
-      }
+      history.back();
+      return;
     }
   </script>
   <script src="/javascripts/speechRecognition.js"></script>

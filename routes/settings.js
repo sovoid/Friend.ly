@@ -1,3 +1,4 @@
+require("dotenv").config();
 var express = require("express");
 var router = express.Router();
 var path = require("path");
@@ -11,7 +12,6 @@ const fs = require("file-system");
 const multer = require("multer");
 const AWS = require("aws-sdk");
 const multerS3 = require("multer-s3");
-AWS.config.loadFromPath('../config/s3_config');
 const s3 = new AWS.S3();
 const upload = multer({
   storage: multerS3({

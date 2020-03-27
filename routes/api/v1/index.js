@@ -1,3 +1,4 @@
+require("dotenv").config();
 var express = require("express");
 var router = express.Router();
 var path = require("path");
@@ -11,7 +12,6 @@ var _ = require("underscore");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const AWS = require("aws-sdk");
-AWS.config.loadFromPath("../../../config/s3_config");
 const S3 = new AWS.S3();
 
 // Rate limiting

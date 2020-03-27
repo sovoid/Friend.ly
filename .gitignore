@@ -4,3 +4,4 @@ node_modules/
 public/cache/
 public/feeds/
 .prettierrc
+config/s3_config.json

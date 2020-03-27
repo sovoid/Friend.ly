@@ -17,6 +17,8 @@ router.get("/", function(req, res, next) {
           return (eachUser.id === req_user.id || req_user.chats[eachUser.id] || pearsonCorrelation([underscore.values(req_user.bigFive), underscore.values(eachUser.bigFive)], 0, 1) < 0.5);
         });
         
+        let suggestedUsers = [];
+        
         let suggestedUsersGroup = underscore.groupBy(users, function iteratee(eachUser) {
           return Math.floor(eachUser.similarityIndex*10);
         });

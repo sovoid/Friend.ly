@@ -24,7 +24,7 @@
     <%- include('../footer') -%>
   </body>
   <script type="text/javascript">
-    const _id = "<%= user._id %>";
+    const id = "<%= user.id %>";
   </script>
     <div id="notify_message" class="notify_message-success">
 
@@ -56,7 +56,7 @@
             method: 'POST',
             url: '/api/v1/user/set',
             data: {
-                "_id":_id,
+                "id":id,
                 key: key.toLowerCase().replace(' ', ''),
                 value
             }

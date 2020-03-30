@@ -1,5 +1,3 @@
 tasks:
-  - init: npm install
-    command: npm run start
-image:
-  file: .gitpod.Dockerfile
+  - init: git pull origin master 
+    command: npm i

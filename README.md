@@ -33,7 +33,8 @@
 
 - [About the Project](#about-the-project)
   - [Built With](#built-with)
-- [Development](#develipment)
+- [Development](#development)
+  - [Cloud Setup](#cloud setup)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Roadmap](#roadmap)
@@ -69,6 +70,12 @@ This project would never have been possible without these wonderful frameworks a
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
+
+### Cloud Setup with GitPod
+
+[Gitpod](https://www.gitpod.io/) can be used to develop Friend.ly in the cloud. Instructions are available in our [wiki](https://github.com/CircuitVerse/CircuitVerse/wiki/Development-on-Gitpod). All the commits, if any needs to be made to a branch using convention issue-<issue number on tracker>.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/AlQaholic007/Friend.ly)
 
 ### Prerequisites
 

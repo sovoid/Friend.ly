@@ -91,7 +91,7 @@ npm install
 1. Clone the repo
 
 ```sh
-git clone https:://github.com/AlQaholic007/Friend.ly
+git clone https://github.com/AlQaholic007/Friend.ly
 ```
 
 2. Install NPM packages

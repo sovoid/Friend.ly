@@ -1,0 +1,3 @@
+tasks:
+  - init: git pull origin master 
+    command: npm i

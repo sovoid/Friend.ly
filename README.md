@@ -2,11 +2,11 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]<br>
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/addcb42c255b4a819c6d2b16b18d92a6)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlQaholic007/Friend.ly&amp;utm_campaign=Badge_Grade) [![CircleCI](https://circleci.com/gh/AlQaholic007/Friend.ly.svg?style=svg)](https://circleci.com/gh/AlQaholic007/Friend.ly) [![Build Status](https://travis-ci.com/AlQaholic007/Friend.ly.svg?token=qJs8ej6Y7g54csoc3mXz&branch=master)](https://travis-ci.org/AlQaholic007/Friend.ly)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/addcb42c255b4a819c6d2b16b18d92a6)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=und3fined-v01d/Friend.ly&amp;utm_campaign=Badge_Grade) [![CircleCI](https://circleci.com/gh/und3fined-v01d/Friend.ly.svg?style=svg)](https://circleci.com/gh/und3fined-v01d/Friend.ly) [![Build Status](https://travis-ci.com/und3fined-v01d/Friend.ly.svg?token=qJs8ej6Y7g54csoc3mXz&branch=master)](https://travis-ci.org/und3fined-v01d/Friend.ly)
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/AlQaholic007/AlQaholic007">
+  <a href="https://github.com/und3fined-v01d/und3fined-v01d">
     <img src="./public/images/astronaut.gif" width="70%" alt="Logo">
   </a>
 
@@ -19,9 +19,9 @@
     <br><br>
     With Friend.ly, we propose a novel FRS which leverages text-mining, personality trait extraction, sentiment analysis and hybrid filtering and show it to be having a better performance than most collaborative filtering based FRSs.
     <br />
-    <a href="https://github.com/AlQaholic007/tracker/issues">Report Bug or Feature Request</a>
+    <a href="https://github.com/und3fined-v01d/tracker/issues">Report Bug or Feature Request</a>
     ·
-    <a href="https://github.com/AlQaholic007/tracker/issues">Raise a PR</a>
+    <a href="https://github.com/und3fined-v01d/tracker/issues">Raise a PR</a>
   </p>
 </p>
 
@@ -55,12 +55,12 @@ This project would never have been possible without these wonderful frameworks a
 
 - [Node.js](https://nodejs.org)
 - [EJS](https://ejs.co)
-- [Tron](https://github.com/AlQaholic007/Tron)
+- [Tron](https://github.com/und3fined-v01d/Tron)
 - [Watson APIs](https://github.com/watson-developer-cloud/node-sdk#readme)
 - [DeepAI](https://deepai.org/machine-learning-model/nsfw-detector)
 - [Socket.io](https://www.npmjs.com/package/socket.io)
 
-  Friend.ly is a modified version of [Tron](https://github.com/AlQaholic007/Tron)!
+  Friend.ly is a modified version of [Tron](https://github.com/und3fined-v01d/Tron)!
 
 <!-- GETTING STARTED -->
 
@@ -74,7 +74,7 @@ To get a local copy up and running follow these simple example steps.
 [Gitpod](https://www.gitpod.io/) can be used to develop Friend.ly in the cloud. All the commits, if any needs to be made to a branch using convention issue-#
 (issue-number-on-tracker).
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/AlQaholic007/Friend.ly)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/und3fined-v01d/Friend.ly)
 
 ### Prerequisites
 
@@ -91,7 +91,7 @@ npm install
 1. Clone the repo
 
 ```sh
-git clone https://github.com/AlQaholic007/Friend.ly
+git clone https://github.com/und3fined-v01d/Friend.ly
 ```
 
 2. Install NPM packages
@@ -148,18 +148,18 @@ Distributed under the Apache 2.0 License. See `LICENSE.md` for more information.
 
 ## Contact
 
-- Soham Parekh <[@AlQaholic007](https://github.com/AlQaholic007), [mail@sohamp.dev](mail@sohamp.dev)>
+- Soham Parekh <[@und3fined-v01d](https://github.com/und3fined-v01d), [mail@sohamp.dev](mail@sohamp.dev)>
 - Vidhi Mody <[@vidhi-mody](https://github.com/vidhi-mody),  vidhimody6@gmail.com>
 - Vrushti Mody <[@vrushti-mody](https://github.com/vrushti-mody),  vrushtimody6@gmail.com>
 
-Project Link: [https://github.com/AlQaholic007/Friend.ly](https://github.com/AlQaholic007/Friend.ly)
+Project Link: [https://github.com/und3fined-v01d/Friend.ly](https://github.com/und3fined-v01d/Friend.ly)
 
-[contributors-shield]: https://img.shields.io/github/contributors/AlQaholic007/Friend.ly?style=flat-square
-[contributors-url]: https://github.com/AlQaholic007/Friend.ly/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/AlQaholic007/Friend.ly?style=flat-square
-[forks-url]: https://github.com/AlQaholic007/Friend.ly/network/members
-[stars-shield]: https://img.shields.io/github/stars/AlQaholic007/Friend.ly?style=flat-square
-[stars-url]: https://github.com/AlQaholic007/Friend.ly/stargazers
-[issues-shield]: https://img.shields.io/github/issues/AlQaholic007/tracker/repo/Friend.ly
-[issues-url]: https://github.com/AlQaholic007/tracker/issues
+[contributors-shield]: https://img.shields.io/github/contributors/und3fined-v01d/Friend.ly?style=flat-square
+[contributors-url]: https://github.com/und3fined-v01d/Friend.ly/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/und3fined-v01d/Friend.ly?style=flat-square
+[forks-url]: https://github.com/und3fined-v01d/Friend.ly/network/members
+[stars-shield]: https://img.shields.io/github/stars/und3fined-v01d/Friend.ly?style=flat-square
+[stars-url]: https://github.com/und3fined-v01d/Friend.ly/stargazers
+[issues-shield]: https://img.shields.io/github/issues/und3fined-v01d/tracker/repo/Friend.ly
+[issues-url]: https://github.com/und3fined-v01d/tracker/issues
 [product-screenshot]: docs/img/screenshot.png

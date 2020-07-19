@@ -30,7 +30,7 @@
     "guid": "0.0.12",
     "http-errors": "~1.7.3",
     "ibm-watson": "^5.4.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mocha": "^7.1.1",
     "mongoose": "^5.9.6",
     "morgan": "~1.10.0",

@@ -67,7 +67,7 @@ router.get("/post/:action/:query", function(req, res, next) {
           if (postToDelete && postToDelete.static_url) {
             try {
               let params = {
-                bucket: "frenly",
+                Bucket: "frenly",
                 Key: "feeds" + postToDelete.static_url.split("feeds")[1]
               };
               s3.deleteObject(params,(err,data) => {

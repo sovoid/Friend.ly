@@ -10,7 +10,7 @@
   "dependencies": {
     "apikeygen": "^1.1.0",
     "array-tools": "2.0.9",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcrypt-nodejs": "0.0.3",
     "chai": "^4.2.0",
     "compression": "^1.7.4",

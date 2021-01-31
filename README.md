@@ -149,7 +149,7 @@ Distributed under the Apache 2.0 License. See `LICENSE.md` for more information.
 ## Contact
 
 - Soham Parekh <[@und3fined-v01d](https://github.com/und3fined-v01d), [mail@sohamp.dev](mail@sohamp.dev)>
-- Vidhi Mody <[@vidhi-mody](https://github.com/vidhi-mody),  vidhimody6@gmail.com>
+- Vidhi Mody <[@vidhi-mody](https://github.com/vidhi-mody),  vidhimody98@gmail.com>
 - Vrushti Mody <[@vrushti-mody](https://github.com/vrushti-mody),  vrushtimody6@gmail.com>
 
 Project Link: [https://github.com/und3fined-v01d/Friend.ly](https://github.com/und3fined-v01d/Friend.ly)

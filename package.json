@@ -50,7 +50,7 @@
     "socket.io-adapter-mongo": "^2.0.5",
     "time-ago": "^0.2.1",
     "twit": "^2.2.11",
-    "underscore": "^1.9.2",
+    "underscore": "^1.12.1",
     "validator": "^13.0.0"
   },
   "description": "A social media platform written in Node.js",

@@ -51,7 +51,7 @@
     "time-ago": "^0.2.1",
     "twit": "^2.2.11",
     "underscore": "^1.9.2",
-    "validator": "^13.0.0"
+    "validator": "^13.7.0"
   },
   "description": "A social media platform written in Node.js",
   "main": "./bin/www",

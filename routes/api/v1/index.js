@@ -1,3 +1,4 @@
+require("dotenv").config();
 var express = require("express");
 var router = express.Router();
 var path = require("path");
@@ -8,6 +9,10 @@ var ta = require("time-ago");
 const Fuse = require("fuse.js");
 const q = require("queue")({ autostart: true });
 var _ = require("underscore");
+const multer = require("multer");
+const multerS3 = require("multer-s3");
+const AWS = require("aws-sdk");
+const S3 = new AWS.S3();
 
 // Rate limiting
 router.use(function(req, res, next) {
@@ -43,42 +48,6 @@ router.get("/threat", (req, res, next) => {
     res.json({ success: false, error: "Inavlid API Key" });
   }
 });
-
-// router.post("/event", (req, res, next) => {
-//   if (req.body.key !== process.env.API_KEY) {
-//     return res.json({ success: false, error: "Inavlid API Key" });
-//   }
-//   var date = new Date();
-//   var payload = {
-//     text: req.body.text,
-//     title: req.body.title,
-//     link: {
-//       link_url: req.body.link_url,
-//       link_text: req.body.link_text
-//     }
-//   };
-//   console.log(payload);
-//   req.app.events.push({
-//     text: payload.text,
-//     title: payload.title,
-//     img: "/images/universe.png",
-//     time: [date, date.setDate(date.getDate() + 1)],
-//     link: {
-//       link_url: payload.link.link_url,
-//       link_text: payload.link.link_text
-//     },
-//     type() {
-//       if (alertTypes.includes(payload.type)) {
-//         return payload.type;
-//       }
-//     }
-//   });
-//   console.log(req.app.events);
-//   res.json({
-//     success: true,
-//     data: req.app.events
-//   });
-// });
 
 router.get("/v1/posts", function(req, res) {
   if (!req.session.user) {
@@ -233,5 +202,111 @@ router.post("/v1/notifications/markAsRead", function(req, res, next) {
     });
   });
 });
+
+router.post("/v1/user/:mode", function(req, res, next) {
+  if (!req.session.user) return res.sendStatus(404);
+  if (req.params.mode == "picture") {
+    db.findOne({ id: req.query.id }, (err, user) => {
+      if (!user) return res.sendStatus(404);
+      var image_types = ["png", "jpeg", "gif", "jpg"];
+      var form = new formidable.IncomingForm();
+      var buffer = null;
+      var fileName = "";
+
+      form.parse(req);
+
+      form.on("fileBegin", function(name, file) {
+        if (!image_types.includes(file.name.split(".")[1].toLowerCase())) {
+          return res.status(404).send("Unsupported file type!");
+        }
+        if (
+          fs.existsSync(
+            __dirname.split("/routes")[0] +
+              "/public/images/profile_pictures/" +
+              user.id +
+              "." +
+              file.name.split(".")[1]
+          ) &&
+          user.profile_picture
+          // user.profile_picture
+        ) {
+          fs.unlinkSync(
+            __dirname.split("/routes")[0] +
+              "/public/images/profile_pictures/" +
+              user.id +
+              "." +
+              file.name.split(".")[1]
+          );
+          var params = {
+            Bucket: "frenly",
+            Key: "images" + user.profile_picture.split("images")[1]
+          };
+          s3.deleteObject(params, (err, data) => {
+            if (err) console.log(err, err.stack);
+          });
+        }
+        file.path =
+          __dirname.split("/routes")[0] +
+          "/public/images/profile_pictures/" +
+          user.id +
+          "." +
+          file.name.split(".")[1];
+      });
+
+      form.on("file", function(name, file) {
+        if (!image_types.includes(file.name.split(".")[1].toLowerCase())) {
+          return;
+        }
+        buffer = fs.readFileSync(file.path);
+        fileName = file.name;
+      });
+
+      form.on("end", function() {
+        s3.putObject(
+          {
+            Bucket: "frenly",
+            Key: `images/profile_pictures/${user.id}.${fileName
+              .split(".")[1]
+              .toLowerCase()}`,
+            Body: buffer,
+            ACL: "public-read"
+          },
+          (err, data) => {
+            if (err) console.log(err);
+            user[
+              "profile_picture"
+            ] = `https://frenly.s3.ap-south-1.amazonaws.com/images/profile_pictures/${
+              user.id
+            }.${fileName.split(".").pop().toLowerCase()}`;
+            user.save((err, savedUser) => {
+              console.log("updated");
+              res
+                .status(200)
+                .send(
+                  "/images/profile_pictures/" +
+                    user.id +
+                    "." +
+                    fileName.split(".").pop()
+                );
+            });
+          }
+        );
+      });
+      // return;
+    });
+    return;
+  }
+  db.findOne({ id: req.body.id }, (err, user) => {
+    if (err) return res.end(err);
+    if (!user) return res.sendStatus(404);
+
+    user[req.body.key] = req.body.value;
+    user.save((err, profile) => {
+      res.status(200).send("done");
+    });
+  });
+});
+
+
 
 module.exports = router;

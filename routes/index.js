@@ -18,6 +18,7 @@ router.get("/", function(req, res, next) {
         });
         
         let suggestedUsers = [];
+        
         let suggestedUsersGroup = underscore.groupBy(users, function iteratee(eachUser) {
           return Math.floor(eachUser.similarityIndex*10);
         });
@@ -26,6 +27,8 @@ router.get("/", function(req, res, next) {
           suggestedUsersGroup[key] = underscore.sortBy(value, (eachUser) => eachUser.rating.value);
           suggestedUsers = underscore.union(suggestedUsers, value);
         })
+
+        
 
         getUserTone(req_user, function (err, mood) {
           res.render("index", {

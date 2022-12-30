@@ -31,7 +31,7 @@
     "http-errors": "~1.7.3",
     "ibm-watson": "^5.4.0",
     "lodash": "^4.17.15",
-    "mocha": "^7.1.1",
+    "mocha": "^10.2.0",
     "mongoose": "^5.9.6",
     "morgan": "~1.10.0",
     "mv": "2.1.1",
